@@ -81,7 +81,7 @@
                             <a href="DownloadServlet?fileName=<%= b.getFilePath() %>" class="btn btn-primary btn-sm"><i class="fas fa-download"></i>&nbsp; Download notes</a>
                             <ul class="list-group list-group-flush mt-2">
                                 <li class="list-group-item text-end"><span style="float: left;"><a href="" onclick="doLike(<%= b.getNoteId() %>,<%= userId %>)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
-                                <a href="#" class="btn btn-outline-dark btn-sm">More Info</a>
+                                <a href="show_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm">More Info</a>
                                 <li class="list-group-item text-center text-muted"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
                             </ul>
                             <!-- BUTTON -->
@@ -94,6 +94,18 @@
                 </div>
                                 <% } %>
             </div>
+            
+            <!--Floating Button start-->
+            <div class="action"  onClick="actionToggle();">
+                <span class="justify-content-center">+</span>
+                <ul>
+                    <li> <a href="create_pdf.jsp">Create Pdf</a></li>            
+                    <li style="color:white"><a data-bs-toggle="modal"  data-bs-target="#addNoteModal">Add notes</a></li>     
+                    <li><a href="contact.jsp">Request notes</a></li>      
+                </ul>        
+            </div>
+            <!--Floating Button end-->
+            
         </div>
 
             
@@ -187,6 +199,15 @@
         
         <!--Javascript for Likes-->
         <script src="Js/Like.js"></script>
+        
+        <!--For the floating button toggle-->
+        <script type="text/javascript">
+            function actionToggle()
+            {
+                var action=document.querySelector('.action');
+                action.classList.toggle('active')
+            }
+       </script>
         
         
     </body>

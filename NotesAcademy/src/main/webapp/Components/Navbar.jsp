@@ -126,14 +126,9 @@
                 </ul>
               </li>-->
 
-              <!-- ABOUT -->
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-
               <!-- CONTACT -->
               <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="contact.jsp">Contact</a>
               </li>
 
               <%

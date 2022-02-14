@@ -4,6 +4,9 @@
     Author     : nivek
 --%>
 
+<%@page import="com.notesacademy.entities.Note"%>
+<%@page import="com.notesacademy.DAO.LikeDAOImpl"%>
+<%@page import="com.notesacademy.DAO.NoteDAOImpl"%>
 <%@page import="com.notesacademy.entities.Category"%>
 <%@page import="com.notesacademy.DAO.CategoryDAOImpl"%>
 <%@page import="com.notesacademy.DB.DBConnection"%>
@@ -29,8 +32,11 @@
         <title>Notes Academy</title>
 
         <!-- Bootstrap and Font Awesome links -->
-        <%@ include file="Components/Bootstrap.jsp"%>
-        <link rel="stylesheet" href="Stylesheets/index.css">
+        <%@ include file="Components/Bootstrap.jsp"%> 
+        <link rel="stylesheet" href="Stylesheets/index.css">    
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>     
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
     </head>
 
     <body>
@@ -46,7 +52,7 @@
         </div>
 
         <!-- Header start -->
-        <header class="jumbotron">
+        <header class="jumbotron" id="BackToTop">
             <div class="container">
 
                 <div class="row row-header">
@@ -54,7 +60,7 @@
                         <h1 class="lets-note-it">Let's note it together.</h1>
                         <h5>College notes available here</h5>
                         <a id="addnotesbtn" class="btn px-4 py-2 mt-4"  onclick="showAlert();"><b><span>Add notes </span></b></a>
-                        <a id="recentnotesbtn" class="btn  px-4 py-2 mt-4"><b><span>View recent posts </span></b></a>
+                        <a href="#recentsection" id="recentnotesbtn" class="btn  px-4 py-2 mt-4"><b><span>View recent posts </span></b></a>
                     </div>  
                     <div class="col col-sm"></div>
 
@@ -85,8 +91,11 @@
                             for (Category b : listcat) {
                         %>
 
-                        <div class="card mt-4  shadow-lg" style="width: 24rem;"> <!--BOOTSTRAP CARD-->
-                            <img src="data:image/jpg;base64, <%= b.getCategoryImgString()%>" class="card-img-top img-fluid" alt="img">
+                        <div class="card mt-4  shadow-lg" style="width: 24rem;" id="subjectcard"> <!--BOOTSTRAP CARD-->
+<!--                            <img src="data:image/jpg;base64, " class="card-img-top img-fluid" alt="img">-->
+                            <div class="card-body" id="cardbody">
+                                <h5 class="card-title" style="padding: 6px 20px 6px 20px;"><%=b.getCategoryName() %></h5>                   
+                            </div>
 
                             <!--                          <div class="card-body">
                                                             <h5 class="card-title">Science</h5>
@@ -97,9 +106,9 @@
                             <% List<Course> listcou = daocou.getCourses(b.getCategoryId());
                                 for (Course c : listcou) {
                             %>
-                            <ul class="list-group list-group-flush">
+                            <ul class="list-group list-group-flush ">
                                 <!--Sending category name , course id and course name to subject.jsp through the url-->
-                                <a href="subjects.jsp?category=<%=b.getCategoryName()%>&courseid=<%=c.getCourseId()%>&course=<%=c.getCourseName().replaceAll("\\s+", "-")%>" class="card-link"><li class="list-group-item"><%=c.getCourseName()%></li></a>
+                                <a href="subjects.jsp?category=<%=b.getCategoryName()%>&courseid=<%=c.getCourseId()%>&course=<%=c.getCourseName().replaceAll("\\s+", "-")%>" class="card-link"><li class="list-group-item listitem"><%=c.getCourseName()%></li></a>
 
 
                                 <!--                                <li class="list-group-item"><a href="#" class="card-link">SYJC</a></li>
@@ -145,19 +154,120 @@
 
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Subjects Available end -->
+                <!-- Subjects Available end -->
+                
+            <!--Recent notes start-->
+            <br >
+            <div id="recentsection"></div>
 
-    <!-- JQuery - Popper - Bootstrap -->
-    <%@include file="Components/JqueryPopperBootstrap.jsp" %>
+            <h2  class="mb-2 mt-5 subjects-available" >Recently added notes</h2>
+            <%
+                    NoteDAOImpl dao = new NoteDAOImpl(DBConnection.getConnection());
+                    LikeDAOImpl ldao = new LikeDAOImpl(DBConnection.getConnection());
+
+                    List<Note> list = dao.getAllNotes();
+                    for(Note b : list){
+                %>
+                
+                <div class="col-lg-3  mt-4" >
+                    <div class="card shadow-lg">
+                        <div class="card-header" style="background-color: #6B9B8A; color: white; "><%= b.getNoteTitle() %></div>
+                        <div class="card-body">           
+                            <p class="card-text" style="padding: 0;"><%= b.getNoteDescription() %></p>
+                            <a href="DownloadServlet?fileName=<%= b.getFilePath() %>" class="btn btn-primary btn-sm"><i class="fas fa-download"></i>&nbsp; Download notes</a>
+                            
+                            <ul class="list-group list-group-flush mt-2 ">
+                                <li class="list-group-item text-end" id="notesitem"><span style="float: left;"><a href="#" onclick="doLike(<%= b.getNoteId() %>,0)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
+                                <a href="show_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm">More Info</a>
+                                <li class="list-group-item text-center text-muted" id="notesdesc"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                                <% } %>
+                                <!--Recent notes end-->
+ 
+            </div>
+               
+             <!--Floating Button start-->
+             <div class="action"  onClick="actionToggle();" style="z-index: 1">
+                <span class="justify-content-center">+</span>
+                <ul>
+                    <li> <a href="create_pdf.jsp">Create Pdf</a></li>            
+                    <li style="color:white"><a onclick="showAlert(); " href="#BackToTop">Add notes</a></li>     
+                    <li><a href="contact.jsp">Request notes</a></li>      
+                </ul>        
+            </div>
+            <!--Floating Button end-->
+            
+            <!-- Number cards start -->
+            <div class="row text-center">
+                <h2 class="mb-0 mt-4 subjects-available" >Main Highlights</h2>
+                <div class="counter-up">
+                    <div class="content">
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-history"></i></div>
+                        <div class="counter">724</div>
+                        <div class="text">Working Hours</div>
+                      </div>
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-gift"></i></div>
+                        <div class="counter">508</div>
+                        <div class="text">Completed Projects</div>
+                      </div>
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <div class="counter">436</div>
+                        <div class="text">Happy Clients</div>
+                      </div>
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-award"></i></div>
+                        <div class="counter">120</div>
+                        <div class="text">Awards Received</div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+  
+        </div>
+              
+        <div class="bg-dark">
+                <%@include file="footer.jsp" %>
+        </div>                       
+        
+                                
+                                
+                                <script>
+  $(document).ready(function(){
+        $('.counter').counterUp({
+          delay: 10,
+          time: 1200
+        });
+        
+  });
+  </script>
+
+    <!-- JQUERY , POPPER , BOOTSTRAP - USE SAME ORDER -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+
+
     
     <!--Javascript validation for Signup Password and the alert for add notes-->
         <script type="text/javascript" src="Js/SignupValidation.js"></script>
-        
-     
-    
+
+        <!--For the floating button toggle-->
+        <script type="text/javascript">
+            function actionToggle()
+            {
+                var action=document.querySelector('.action');
+                action.classList.toggle('active');
+            }
+       </script>
 
 </body>
 

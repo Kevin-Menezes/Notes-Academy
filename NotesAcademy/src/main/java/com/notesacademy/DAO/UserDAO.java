@@ -3,6 +3,7 @@ package com.notesacademy.DAO;
 
 // THIS IS ONLY AN INTERFACE WHERE WE WE ONLY WRITE THE FUNCTION DECLARATION
 
+import com.notesacademy.entities.Feedback;
 import com.notesacademy.entities.UserDetails;
 import java.util.List;
 
@@ -24,5 +25,7 @@ public interface UserDAO
      public boolean updateEditUser(UserDetails us); // Updates user details based on user id
      
      public boolean deleteUser(int id); //  Deletes the user based on the user id
+     
+     public boolean sendFeedback(Feedback f); // Sends feedback from contact page to the user
     
 }

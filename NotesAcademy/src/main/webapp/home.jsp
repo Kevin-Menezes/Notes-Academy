@@ -146,6 +146,7 @@
                         <input type="hidden" name="selectedSubject" id="selectedSubject"/>
                         <input type="hidden" name="selectedSubjectId" id="selectedSubjectId"/>
                         
+                        <input type="hidden"  name="uid" value="<%= us.getUserId() %>">
                         <input type="hidden"  name="uname" value="<%= us.getUserName() %>">
                         <input type="hidden"  name="uprofession" value="<%= us.getUserProfession() %>">
                         <input type="hidden"  name="ucollege" value="<%= us.getUserCollege() %>">
@@ -199,8 +200,11 @@
                             for (Category b : listcat) {
                         %>
 
-                        <div class="card mt-4 shadow-lg" style="width: 24rem;"> <!--BOOTSTRAP CARD-->
-                            <img src="data:image/jpg;base64, <%= b.getCategoryImgString()%>" class="card-img-top img-fluid" alt="img">
+                        <div class="card mt-4 shadow-lg" style="width: 24rem;" id="subjectcard"> <!--BOOTSTRAP CARD-->
+<!--                            <img src="data:image/jpg;base64, <%= b.getCategoryImgString()%>" class="card-img-top img-fluid" alt="img">-->
+                            <div class="card-body" id="cardbody">
+                                <h5 class="card-title" style="padding: 6px 20px 6px 20px;"><%=b.getCategoryName() %></h5>                   
+                            </div>
 
                             <!--                          <div class="card-body">
                                                             <h5 class="card-title">Science</h5>
@@ -260,9 +264,26 @@
                     </div>
                 </div>
             </div>
+             <!-- Subjects Available end -->
+                        
+            <!--Floating Button start-->
+            <div class="action"  onClick="actionToggle();">
+                <span class="justify-content-center">+</span>
+                <ul>
+                    <li> <a href="create_pdf.jsp">Create Pdf</a></li>            
+                    <li style="color:white"><a data-bs-toggle="modal"  data-bs-target="#sendnotesModal">Add notes</a></li>     
+                    <li><a href="contact.jsp">Request notes</a></li>      
+                </ul>        
+            </div>
+            <!--Floating Button end-->
+                        
         </div>
-    </div>
-    <!-- Subjects Available end -->
+                        
+        <div class="bg-dark">
+            <%@include file="footer.jsp" %>
+        </div>     
+
+    
         
 
     <!-- JQuery - Popper - Bootstrap -->
@@ -270,6 +291,15 @@
  
     <!--JQuery and Ajax for Asynchronous Add Notes (JQuery should always be used after the document has been loaded)-->
      <script type="text/javascript" src="Js/AddNotes.js"></script>
+     
+     <!--For the floating button toggle-->
+        <script type="text/javascript">
+            function actionToggle()
+            {
+                var action=document.querySelector('.action');
+                action.classList.toggle('active')
+            }
+       </script>
    
     </body>
 </html>

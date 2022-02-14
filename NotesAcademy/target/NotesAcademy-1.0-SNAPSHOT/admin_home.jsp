@@ -168,6 +168,20 @@
                 </div>
 
             </div>
+                            
+            <!--Floating Button start-->
+            <div class="action"  onClick="actionToggle();">
+                <span class="justify-content-center">+</span>
+                <ul>
+                    <li> <a href="create_pdf.jsp">Create Pdf</a></li>            
+                    <li style="color:white"><a data-bs-toggle="modal"  data-bs-target="#addnotesModal">Add notes</a></li>     
+                    <li><a href="contact.jsp">Request notes</a></li>      
+                </ul>        
+            </div>
+            <!--Floating Button end-->
+            
+            
+                            
         </div>
 
                             
@@ -291,6 +305,15 @@
  
     <!--JQuery and Ajax for Asynchronous Add Notes (JQuery should always be used after the document has been loaded)-->
      <script type="text/javascript" src="Js/AddNotes.js"></script>
+     
+     <!--For the floating button toggle-->
+        <script type="text/javascript">
+            function actionToggle()
+            {
+                var action=document.querySelector('.action');
+                action.classList.toggle('active')
+            }
+       </script>
         
     </body>
 </html>

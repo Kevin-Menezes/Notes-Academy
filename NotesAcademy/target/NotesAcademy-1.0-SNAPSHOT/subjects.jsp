@@ -59,7 +59,7 @@
 
                         %>
 
-                        <div class="card" style="width: 24rem; border-color: #6B9B8A;"> <!--BOOTSTRAP CARD-->
+                        <div class="card shadow-lg" style="width: 24rem; "> <!--BOOTSTRAP CARD-->
 
                             <div class="card-body" style="background-color: #6B9B8A;">
                                 <h3 class="card-title ct-bg" >First Year</h3>
@@ -94,7 +94,7 @@
 
                         %>
             
-                        <div class="card  mt-3 mt-lg-0" style="width: 24rem;border-color: #6B9B8A;"> <!--BOOTSTRAP CARD-->
+                        <div class="card  mt-3 mt-lg-0 shadow-lg" style="width: 24rem;"> <!--BOOTSTRAP CARD-->
 
                             <div class="card-body" style="background-color: #6B9B8A;">
                                 <h3 class="card-title">Second Year</h3>
@@ -132,7 +132,7 @@
 
                         %>                            
 
-                        <div class="card mt-3 mt-xl-0" style="width: 24rem;border-color: #6B9B8A;"> <!--BOOTSTRAP CARD-->
+                        <div class="card mt-3 mt-xl-0 shadow-lg" style="width: 24rem;"> <!--BOOTSTRAP CARD-->
 
                             <div class="card-body" style="background-color: #6B9B8A;">
                                 <h3 class="card-title">Third Year</h3>
@@ -169,7 +169,7 @@
 
                         %>                            
 
-                        <div class="card mt-3 mt-xl-0" style="width: 24rem;border-color: #6B9B8A;"> <!--BOOTSTRAP CARD-->
+                        <div class="card mt-3 mt-xl-0 shadow-lg" style="width: 24rem;"> <!--BOOTSTRAP CARD-->
 
                             <div class="card-body" style="background-color: #6B9B8A;">
                                 <h3 class="card-title">Fourth Year</h3>

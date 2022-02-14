@@ -92,6 +92,10 @@
         <servlet-name>DeleteNoteServlet</servlet-name>
         <servlet-class>com.notesacademy.servlets.DeleteNoteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContactFormServlet</servlet-name>
+        <servlet-class>com.notesacademy.servlets.ContactFormServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>DeleteNoteServlet</servlet-name>
         <url-pattern>/DeleteNoteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactFormServlet</servlet-name>
+        <url-pattern>/ContactFormServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

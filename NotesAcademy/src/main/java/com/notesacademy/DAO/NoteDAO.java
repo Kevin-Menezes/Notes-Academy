@@ -27,6 +27,15 @@ public interface NoteDAO
     public boolean updateEditNote(Note n); // Edits details of a particular note
     
     public boolean deleteNote(int id); // Delete note based on noteid
+    
+    public List<Note> getRecentNotes(int subjectId) ; // Fetching recent notes from the db based on a particular subject
+    
+    public List<Note> getAllNotes() ; // Fetching all notes from the db
+    
+    public List<Note> getRecentSearchNotes(String ch) ; // Fetching recent notes from the db based on a particular search
    
+    public List<Note> getMostLikedNotes(int subjectId); // Fetching most liked notes from the db based on a particular subject
+    
+    public List<Note> getMostLikedSearchNotes(String ch) ; // Fetching most liked notes from the db based on a particular search
     
 }

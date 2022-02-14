@@ -127,7 +127,7 @@ public class NoteDAOImpl implements NoteDAO
         
         try
         {
-         String sql = "INSERT INTO tempnotes(noteTitle,noteDescription,categoryName,courseName,subjectYear,subjectName,noteDate,userName,userProfession,userCollege,pdfPath,subject_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"; 
+         String sql = "INSERT INTO tempnotes(noteTitle,noteDescription,categoryName,courseName,subjectYear,subjectName,noteDate,userId,userName,userProfession,userCollege,pdfPath,subject_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
        
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -138,12 +138,13 @@ public class NoteDAOImpl implements NoteDAO
             ps.setString(5,n.getSubjectYear());
             ps.setString(6,n.getSubjectName());
             ps.setString(7,n.getNoteDate());
-            ps.setString(8,n.getUserName());
-            ps.setString(9,n.getUserProfession());
-            ps.setString(10,n.getUserCollege());
+            ps.setInt(8,n.getUserId());
+            ps.setString(9,n.getUserName());
+            ps.setString(10,n.getUserProfession());
+            ps.setString(11,n.getUserCollege());
         
-            ps.setString(11,n.getFilePath());
-            ps.setInt(12,n.getSubject_id());
+            ps.setString(12,n.getFilePath());
+            ps.setInt(13,n.getSubject_id());
             //ps.setBytes(13,bytes);
         
             int i = ps.executeUpdate();
@@ -215,12 +216,13 @@ public class NoteDAOImpl implements NoteDAO
                 n.setSubjectYear(rs.getString(6));
                 n.setSubjectName(rs.getString(7));
                 n.setNoteDate(rs.getString(8));
-                n.setUserName(rs.getString(9));
-                n.setUserProfession(rs.getString(10));
-                n.setUserCollege(rs.getString(11));
+                n.setUserId(rs.getInt(9));
+                n.setUserName(rs.getString(10));
+                n.setUserProfession(rs.getString(11));
+                n.setUserCollege(rs.getString(12));
                 //Blob blob = rs.getBlob(14);
-                n.setFilePath(rs.getString(12));
-                n.setSubject_id(rs.getInt(13));
+                n.setFilePath(rs.getString(13));
+                n.setSubject_id(rs.getInt(14));
                 list.add(n);
          
                 //System.out.println(blob+"This is blob");
@@ -465,13 +467,251 @@ public class NoteDAOImpl implements NoteDAO
             System.out.println("There is error in NoteDAOImpl - deleteNote : "+e);
         }
         return f;
-        
-       
-        
+
     }
     
     
+    // ----------------------------------------------------------- Get recent notes based on particular subject -------------------------------------------------------------------
+
+    @Override
+    public List<Note> getRecentNotes(int subjectId) 
+    {
+        List<Note> list = new ArrayList<Note>();
+       Note n = null;
+       
+        try 
+        {
+            String sql = "SELECT * FROM note WHERE subject_id = ? ORDER BY noteId DESC";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,subjectId);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                n = new Note();
+                n.setNoteId(rs.getInt(1));
+                n.setNoteTitle(rs.getString(2));
+                n.setNoteDescription(rs.getString(3));
+                n.setCategoryName(rs.getString(4));
+                n.setCourseName(rs.getString(5));
+                n.setSubjectYear(rs.getString(6));
+                n.setSubjectName(rs.getString(7));
+                n.setNoteDate(rs.getString(8));
+                n.setUserName(rs.getString(9));
+                n.setUserProfession(rs.getString(10));
+                n.setUserCollege(rs.getString(11));
+                n.setFilePath(rs.getString(12));
+                n.setSubject_id(rs.getInt(13));
+                
+                System.out.println(n);
+                list.add(n);
+            }
+            
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("There is error in NoteDAOImpl - getRecentNotes : "+e);
+        }
+        
+        System.out.println("Notes : "+list);
+        return list;
+ 
+    }
     
+    // ----------------------------------------------------------- Get all notes (recent notes index.jsp page)  -------------------------------------------------------------------
+
+    @Override
+    public List<Note> getAllNotes() 
+    {
+        List<Note> list = new ArrayList<Note>();
+       Note n = null;
+       
+        try 
+        {
+            String sql = "SELECT * FROM note ORDER BY noteId DESC";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            int i = 1; 
+            while(rs.next() && i<=4)
+            {
+                n = new Note();
+                n.setNoteId(rs.getInt(1));
+                n.setNoteTitle(rs.getString(2));
+                n.setNoteDescription(rs.getString(3));
+                n.setCategoryName(rs.getString(4));
+                n.setCourseName(rs.getString(5));
+                n.setSubjectYear(rs.getString(6));
+                n.setSubjectName(rs.getString(7));
+                n.setNoteDate(rs.getString(8));
+                n.setUserName(rs.getString(9));
+                n.setUserProfession(rs.getString(10));
+                n.setUserCollege(rs.getString(11));
+                n.setFilePath(rs.getString(12));
+                n.setSubject_id(rs.getInt(13));
+                i++;
+                
+                System.out.println(n);
+                list.add(n);
+            }
+            
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("There is error in NoteDAOImpl - getAllNotes : "+e);
+        }
+        
+        System.out.println("Notes : "+list);
+        return list;
+        
+    }
+
+    // ------------------------------------------------------------- Recent Notes from search bar ----------------------------------------------------------------------
+    @Override
+    public List<Note> getRecentSearchNotes(String ch) 
+    {
+        List<Note> list = new ArrayList<Note>();
+        Note n = null;
+        
+        try 
+        {
+            String sql = "SELECT * FROM note WHERE categoryName like ? or courseName like ? or subjectName like ? or noteTitle like ? ORDER BY noteId DESC";
+            PreparedStatement ps1 = con.prepareStatement(sql);
+            
+            ps1.setString(1, "%"+ch+"%"); // We use % to search for  all words that has the character in them either before or after
+            ps1.setString(2, "%"+ch+"%");
+            ps1.setString(3, "%"+ch+"%");
+            ps1.setString(4, "%"+ch+"%");
+            
+            ResultSet rs = ps1.executeQuery();
+            while(rs.next())
+            {
+                n = new Note();
+                n.setNoteId(rs.getInt(1));
+                n.setNoteTitle(rs.getString(2));
+                n.setNoteDescription(rs.getString(3));
+                n.setCategoryName(rs.getString(4));
+                n.setCourseName(rs.getString(5));
+                n.setSubjectYear(rs.getString(6));
+                n.setSubjectName(rs.getString(7));
+                n.setNoteDate(rs.getString(8));
+                n.setUserName(rs.getString(9));
+                n.setUserProfession(rs.getString(10));
+                n.setUserCollege(rs.getString(11));
+                n.setFilePath(rs.getString(12));
+                n.setSubject_id(rs.getInt(13));
+                
+                System.out.println(n);
+                list.add(n);
+            }
+
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("There is error in NoteDAOImpl - getNotesBySearch : "+e);
+        }
+        
+         System.out.println("Notes : "+list);
+        return list;
+       
+    }
     
+    // ------------------------------------------------------------- Mostliked notes ----------------------------------------------------------------------
+
+    @Override
+    public List<Note> getMostLikedNotes(int subjectId) 
+    {
+        List<Note> list = new ArrayList<Note>();
+       Note n = null;
+       
+        try 
+        {
+            String sql = "SELECT * FROM note WHERE subject_id = ? ORDER BY likeCount DESC";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,subjectId);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                n = new Note();
+                n.setNoteId(rs.getInt(1));
+                n.setNoteTitle(rs.getString(2));
+                n.setNoteDescription(rs.getString(3));
+                n.setCategoryName(rs.getString(4));
+                n.setCourseName(rs.getString(5));
+                n.setSubjectYear(rs.getString(6));
+                n.setSubjectName(rs.getString(7));
+                n.setNoteDate(rs.getString(8));
+                n.setUserName(rs.getString(9));
+                n.setUserProfession(rs.getString(10));
+                n.setUserCollege(rs.getString(11));
+                n.setFilePath(rs.getString(12));
+                n.setSubject_id(rs.getInt(13));
+                
+                System.out.println(n);
+                list.add(n);
+            }
+            
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("There is error in NoteDAOImpl - getRecentNotes : "+e);
+        }
+        
+        System.out.println("Notes : "+list);
+        return list;
+  
+    }
+
+    // -------------------------------- Fetching most liked notes from the db based on a particular search ----------------------------
     
+    @Override
+    public List<Note> getMostLikedSearchNotes(String ch) 
+    {
+        List<Note> list = new ArrayList<Note>();
+        Note n = null;
+        
+        try 
+        {
+            String sql = "SELECT * FROM note WHERE categoryName like ? or courseName like ? or subjectName like ? or noteTitle like ? ORDER BY likeCount DESC";
+            PreparedStatement ps1 = con.prepareStatement(sql);
+            
+            ps1.setString(1, "%"+ch+"%"); // We use % to search for  all words that has the character in them either before or after
+            ps1.setString(2, "%"+ch+"%");
+            ps1.setString(3, "%"+ch+"%");
+            ps1.setString(4, "%"+ch+"%");
+            
+            ResultSet rs = ps1.executeQuery();
+            while(rs.next())
+            {
+                n = new Note();
+                n.setNoteId(rs.getInt(1));
+                n.setNoteTitle(rs.getString(2));
+                n.setNoteDescription(rs.getString(3));
+                n.setCategoryName(rs.getString(4));
+                n.setCourseName(rs.getString(5));
+                n.setSubjectYear(rs.getString(6));
+                n.setSubjectName(rs.getString(7));
+                n.setNoteDate(rs.getString(8));
+                n.setUserName(rs.getString(9));
+                n.setUserProfession(rs.getString(10));
+                n.setUserCollege(rs.getString(11));
+                n.setFilePath(rs.getString(12));
+                n.setSubject_id(rs.getInt(13));
+                
+                System.out.println(n);
+                list.add(n);
+            }
+
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("There is error in NoteDAOImpl - getMostLikedSearchNotes : "+e);
+        }
+        
+         System.out.println("Notes : "+list);
+        return list;
+        
+    }
+
 }

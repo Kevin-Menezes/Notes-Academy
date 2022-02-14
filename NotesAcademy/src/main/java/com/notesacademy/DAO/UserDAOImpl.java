@@ -1,6 +1,7 @@
 
 package com.notesacademy.DAO;
 
+import com.notesacademy.entities.Feedback;
 import com.notesacademy.entities.UserDetails;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -243,6 +244,37 @@ public class UserDAOImpl implements UserDAO
         }
         return f;
        
+    }
+    
+    // ------------------------------------------------- Sends feedback from contact page to db ----------------------------------------------------------------
+
+    @Override
+    public boolean sendFeedback(Feedback f) 
+    {
+        boolean flag = false;
+        
+        try{
+            String sql = "insert into feedback(userName,userEmail,feedbackMessage) values(?,?,?)"; // INSERTING INTO THE DATABASE
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, f.getUserName()); // TAKING VALUES FROM THE USER'S GETTER AND PUTTING IN THE DATABASE
+            ps.setString(2, f.getUserEmail());
+            ps.setString(3, f.getFeedbackMessage());
+        
+            int rs = ps.executeUpdate();
+            
+            if(rs==1) //    WHEN THE INSERTION IS SUCCESSFUL
+            {
+                flag = true;
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("There is error in UserDAOImpl - sendFeedback : "+e);
+        }
+        
+        return flag; // WE RETURN TRUE OR FALSE
+  
     }
       
     

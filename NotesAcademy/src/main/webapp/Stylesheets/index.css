@@ -3,6 +3,7 @@
 
 * {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 /* Declaring Variables */
@@ -225,8 +226,14 @@ nav a {
     }
 }
 
-.card{
-    border: none;
+#subjectcard{
+    border-bottom: : 1px var(--green) solid;
+}
+
+#cardbody{
+    background-color: var(--green); 
+    color:white;
+    max-height: 4em;
 }
 
 .list-group-item{
@@ -238,6 +245,7 @@ nav a {
 .list-group-item:hover{
     background-color: var(--green);
     cursor: pointer;
+    color: white;
 }
 
 .card-link{
@@ -250,9 +258,250 @@ nav a {
     
 }
 
+/* -------------------------------------- Recent notes ----------------------------------------------*/
+#notesitem:hover{
+    background-color: white;
+    cursor: default;
+}
+
+#notesdesc:hover{
+    background-color: white;
+    cursor: default;
+}
+
+/*------------------------------------------- Floating Button -----------------------------------*/
+.action
+{
+    position:fixed;
+    bottom:30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background:var(--green);
+    border-radius:50%;
+    cursor:pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+         
+}
+.action span{
+    
+      postion:relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      color: white;
+      font-size: 2em;
+      transition: 0.3s ease-in-out;
+         
+}
+.action:active  span
+{
+    transform:rotate(135deg);
+    
+}
+
+/*This is the white part*/
+.action ul{
+    position:absolute;
+    bottom:55px;
+    right:5px;
+    background:var(--green);
+    min-width:150px;
+    padding:20px;
+    border-radius:10px;
+    opacity:0;
+    visibility:hidden;
+    transition:0.2s;
+    
+}
+.action.active ul 
+{
+    bottom:65px;
+    opacity: 1;
+    visibility: visible;
+    transition: 0.3s;
+    
+    
+}
+.action.active ul li
+{
+    list-style:none;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    padding:10px 0;
+    transition: 0.3s;
+    
+}
+.action ul li:hover{
+    font-weight:600;
+
+}
+.action ul li:not(:last-child)
+{
+    border-bottom:1px solid rgba(0,0,0,0.2);
+}
+
+.action ul li a{
+    text-decoration: none;
+        color:white;
+}
+
+/*--------------------------------------Numbers button--------------------------------------------*/
+.box{
+    background: var(--green);
+}
+
+.counter-up{
+  background-color: white;
+  min-height: 38vh;
+  padding: 0 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+}
+.counter-up::before{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+  
+}
+.counter-up .content{
+  z-index: 0;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+ 
+}
+.counter-up .content .box{
+  width: calc(25% - 30px);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 20px;
+}
+.content .box .icon{
+  font-size: 48px;
+  color: white;
+}
+.content .box .counter{
+  font-size: 50px;
+  font-weight: 500;
+  color: white;
+  font-family: sans-serif;
+}
+.content .box .text{
+  font-weight: 400;
+  color: white;
+}
+@media screen and (max-width: 1036px) {
+  .counter-up{
+    padding: 50px 50px 0 50px;
+  }
+  .counter-up .content .box{
+    width: calc(50% - 30px);
+    margin-bottom: 50px;
+  }
+}
+@media screen and (max-width: 580px) {
+  .counter-up .content .box{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .wrapper{
+    padding: 20px;
+  }
+  .counter-up{
+    padding: 30px 20px 0 20px;
+  }
+}
 
 
+/*-------------------------------------------Kevin Floating Button -----------------------------------*/
+/*
+.fab-container{
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    z-index: 999;
+    cursor: pointer;
+}
 
+.fab-icon-holder{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: var(--green);
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+.fab-icon-holder:hover{
+    opacity: 0.8;
+}
+
+.fab-icon-holder i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 25px;
+    color: black;
+}
+
+.fab{
+    width: 60px;
+    height: 60px;
+    background: grey;
+}
+
+.fab-options{
+    list-style-type: none;
+    margin: 0;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+
+
+}
+
+.fab:hover + .fab-options, .fab-options:hover{
+    opacity: 1;
+    transform: scale(1);
+}
+
+.fab-options li{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.fab-label{
+    padding: 2px 5px;
+    align-self: center;
+    user-select: none;
+    white-space: nowrap;
+    border-radius: 3px;
+    font-size: 16px;
+    background: brown;
+    color: white;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);
+    margin-right: 10px;
+    
+}*/
 
 
 

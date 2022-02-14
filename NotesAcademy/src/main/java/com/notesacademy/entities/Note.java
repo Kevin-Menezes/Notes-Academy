@@ -11,6 +11,7 @@ public class Note
     private String subjectYear;
     private String subjectName;
     private String noteDate;
+    private int userId;
     private String userName;
     private String userProfession;
     private String userCollege;
@@ -81,6 +82,14 @@ public class Note
         this.noteDate = noteDate;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -124,7 +133,7 @@ public class Note
     public Note() {
     }
 
-    public Note(int noteId, String noteTitle, String noteDescription, String categoryName, String courseName, String subjectYear, String subjectName, String noteDate, String userName, String userProfession, String userCollege, String filePath, int subject_id) {
+    public Note(int noteId, String noteTitle, String noteDescription, String categoryName, String courseName, String subjectYear, String subjectName, String noteDate, int userId, String userName, String userProfession, String userCollege, String filePath, int subject_id) {
         this.noteId = noteId;
         this.noteTitle = noteTitle;
         this.noteDescription = noteDescription;
@@ -133,6 +142,7 @@ public class Note
         this.subjectYear = subjectYear;
         this.subjectName = subjectName;
         this.noteDate = noteDate;
+        this.userId = userId;
         this.userName = userName;
         this.userProfession = userProfession;
         this.userCollege = userCollege;
@@ -140,7 +150,24 @@ public class Note
         this.subject_id = subject_id;
     }
 
-//    Without id
+    // Without note Id
+    public Note(String noteTitle, String noteDescription, String categoryName, String courseName, String subjectYear, String subjectName, String noteDate, int userId, String userName, String userProfession, String userCollege, String filePath, int subject_id) {
+        this.noteTitle = noteTitle;
+        this.noteDescription = noteDescription;
+        this.categoryName = categoryName;
+        this.courseName = courseName;
+        this.subjectYear = subjectYear;
+        this.subjectName = subjectName;
+        this.noteDate = noteDate;
+        this.userId = userId;
+        this.userName = userName;
+        this.userProfession = userProfession;
+        this.userCollege = userCollege;
+        this.filePath = filePath;
+        this.subject_id = subject_id;
+    }
+
+    // Without note id and user id
     public Note(String noteTitle, String noteDescription, String categoryName, String courseName, String subjectYear, String subjectName, String noteDate, String userName, String userProfession, String userCollege, String filePath, int subject_id) {
         this.noteTitle = noteTitle;
         this.noteDescription = noteDescription;
@@ -155,11 +182,11 @@ public class Note
         this.filePath = filePath;
         this.subject_id = subject_id;
     }
-    
 
     @Override
     public String toString() {
-        return "Note{" + "noteId=" + noteId + ", noteTitle=" + noteTitle + ", noteDescription=" + noteDescription + ", categoryName=" + categoryName + ", courseName=" + courseName + ", subjectYear=" + subjectYear + ", subjectName=" + subjectName + ", noteDate=" + noteDate + ", userName=" + userName + ", userProfession=" + userProfession + ", userCollege=" + userCollege + ", filePath=" + filePath + ", subject_id=" + subject_id + '}';
+        return "Note{" + "noteId=" + noteId + ", noteTitle=" + noteTitle + ", noteDescription=" + noteDescription + ", categoryName=" + categoryName + ", courseName=" + courseName + ", subjectYear=" + subjectYear + ", subjectName=" + subjectName + ", noteDate=" + noteDate + ", userId=" + userId + ", userName=" + userName + ", userProfession=" + userProfession + ", userCollege=" + userCollege + ", filePath=" + filePath + ", subject_id=" + subject_id + '}';
     }
+
     
 }

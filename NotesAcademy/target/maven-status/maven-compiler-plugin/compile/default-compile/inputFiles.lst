@@ -16,10 +16,13 @@ D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\serv
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\servlets\LoginServlet.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\DAO\LikeDAO.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\DAO\CourseDAO.java
+D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\servlets\DeleteNoteServlet.java
+D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\entities\Feedback.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\entities\Course.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\servlets\TempNotesDeleteServlet.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\servlets\LogoutServlet.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\entities\Note.java
+D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\servlets\ContactFormServlet.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\servlets\EditSubjectServlet.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\DAO\CourseDAOImpl.java
 D:\KEVIN PROJECTS\NOTES ACADEMY\NotesAcademy\src\main\java\com\notesacademy\servlets\EditCourseServlet.java

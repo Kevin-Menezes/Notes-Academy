@@ -72,10 +72,13 @@
                                 <li class="list-group-item text-center text-muted"><%= b.getCategoryName()%> -> <%= b.getCourseName()%> -> <%= b.getSubjectYear() %> -> <b><%= b.getSubjectName() %></b></li>                                  
                                 <li class="list-group-item text-center text-muted"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
                             </ul>
+                            
+                            <a href="show_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm col-10">More Info</a>
+                            
                             <!-- BUTTON -->
                                 <div class="form-group d-flex justify-content-center">
                                     <a href="ApproveNotesServlet?id=<%= b.getNoteId() %>"  class="btn btn-success col-5 col-sm-3 col-lg-5  mt-2">Add</a>                        
-                                    <a href="TempNotesDeleteServlet?id=<%= b.getNoteId() %>" class="btn btn-dark col-5 col-sm-3 col-lg-5 mt-2 ms-2" style="background-color: black;">Delete</a>        
+                                    <a href="email_delete_note.jsp?nid=<%= b.getNoteId() %>&uid=<%= b.getUserId() %>" class="btn btn-dark col-5 col-sm-3 col-lg-5 mt-2 ms-2" style="background-color: black;">Delete</a>        
                                 </div>
                         </div>
                     </div>

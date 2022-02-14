@@ -27,6 +27,12 @@ public class LikeDAOImpl implements LikeDAO
             ps_insertLike.setInt(1,noteId);
             ps_insertLike.setInt(2,userId);
             ps_insertLike.executeUpdate();
+            
+            String sql1 = "UPDATE note SET likeCount = likeCount + 1 WHERE noteId = ?";
+            PreparedStatement ps_incLikeCount = con.prepareStatement(sql1);
+            ps_incLikeCount.setInt(1,noteId);
+            ps_incLikeCount.executeUpdate();
+            
             f=true;
             
         } 
@@ -105,6 +111,11 @@ public class LikeDAOImpl implements LikeDAO
             p_deleteLike.setInt(1,noteId);
             p_deleteLike.setInt(2,userId);
             p_deleteLike.executeUpdate();
+            
+            String sql2 = "UPDATE note SET likeCount = likeCount - 1 WHERE noteId = ?";
+            PreparedStatement ps_decLikeCount = con.prepareStatement(sql2);
+            ps_decLikeCount.setInt(1,noteId);
+            ps_decLikeCount.executeUpdate();
             
             f = true;
         } 

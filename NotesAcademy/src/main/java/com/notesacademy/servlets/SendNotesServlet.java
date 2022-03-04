@@ -57,6 +57,12 @@ public class SendNotesServlet extends HttpServlet
             String noteTitle  = req.getParameter("ntitle");
             String noteDescription  = req.getParameter("ndescription");
             
+            int notePrice = Integer.parseInt(req.getParameter("nprice"));
+            System.out.println("This is notePrice : "+notePrice);
+            
+            String noteRazor = req.getParameter("nrazor");
+            System.out.println("This is noteRazor : "+noteRazor);
+            
             String categoryName  = req.getParameter("selectedCategory");
             System.out.println("This is category name : "+categoryName);
             
@@ -71,7 +77,7 @@ public class SendNotesServlet extends HttpServlet
 
             int subjectId = Integer.parseInt(req.getParameter("selectedSubjectId"));
             System.out.println("This is subjectId : "+subjectId);
-    
+            
             int userId = Integer.parseInt(req.getParameter("uid"));
             String userName  = req.getParameter("uname");
             String userProfession  = req.getParameter("uprofession");
@@ -90,29 +96,29 @@ public class SendNotesServlet extends HttpServlet
             InputStream is = filePart.getInputStream();
             Files.copy(is, Paths.get(uploadPath + File.separator +fileName), StandardCopyOption.REPLACE_EXISTING);
             
-            // WITHOUT ID
-            Note n = new Note(noteTitle, noteDescription, categoryName, courseName, subjectYear, subjectName, noteDate,userId,userName,userProfession, userCollege,path,subjectId);
-            NoteDAOImpl dao = new NoteDAOImpl(DBConnection.getConnection()); // CONNECTS TO THE DATABASE 
+                // WITHOUT ID
+                Note n = new Note(noteTitle, noteDescription, categoryName, courseName, subjectYear, subjectName, noteDate,userId,userName,userProfession, userCollege,path,subjectId,notePrice,noteRazor);        
+                NoteDAOImpl dao = new NoteDAOImpl(DBConnection.getConnection()); // CONNECTS TO THE DATABASE 
             
-            boolean f = dao.sendNotes(n);
-            
-             if(f)
-            {
-                //session.setAttribute("sendnotessuccessMsg", "Note sent for verification successfully!");
-                //session.setAttribute("fileName",fileName);
-                Message msg = new Message("Note added successfully", "success", "alert-success");
-                session.setAttribute("message", msg); 
-                System.out.println("Note added");
-                resp.sendRedirect("home.jsp");
-            }
-            else
-            {
-                Message msg = new Message("Oops! An error occured! Kindly retry adding the note!", "error", "alert-danger");
-                session.setAttribute("message", msg);
-                System.out.println("Error in adding note");
-                resp.sendRedirect("home.jsp");
-            }
-                     
+                boolean f = dao.sendNotes(n);
+
+                 if(f)
+                {
+                    //session.setAttribute("sendnotessuccessMsg", "Note sent for verification successfully!");
+                    //session.setAttribute("fileName",fileName);
+                    Message msg = new Message("Note added successfully", "success", "alert-success");
+                    session.setAttribute("message", msg); 
+                    System.out.println("Note added");
+                    resp.sendRedirect("home.jsp");
+                }
+                else
+                {
+                    Message msg = new Message("Oops! An error occured! Kindly retry adding the note!", "error", "alert-danger");
+                    session.setAttribute("message", msg);
+                    System.out.println("Error in adding note");
+                    resp.sendRedirect("home.jsp");
+                }
+         
         }
         catch(Exception e)
         {

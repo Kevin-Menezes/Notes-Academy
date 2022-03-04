@@ -65,12 +65,26 @@
             <div class="row text-center" style="margin-top:6em;">
                 <h2 class="mb-4 text-start"><b><%= request.getParameter("subject").replaceAll("-", " ")%></b><a id="addnotebtn" class="btn px-3 py-2 ms-1 ms-sm-4 mt-1 mt-sm-0" data-bs-toggle="modal"  data-bs-target="#addNoteModal"><b><span>Add note </span></b></a></h2><br><br>
                 
-
+                <!--Unpaid notes start-->
                 <%
                     NoteDAOImpl dao = new NoteDAOImpl(DBConnection.getConnection());
                     LikeDAOImpl ldao = new LikeDAOImpl(DBConnection.getConnection());
                     List<Note> list = dao.getNotes(subjectid);
+                    
+                    if(list.isEmpty())
+                    {
+                        
+                %>
+                
+                <h1 class="text-center mt-5">Notes unavailable!</h1>
+                
+                <%  
+                    }
+                    else
+                    {   
                     for(Note b : list){
+                        if(b.getNotePrice()==0)
+                        {
                 %>
                 
                 <div class="col-lg-3  mt-4">
@@ -80,7 +94,7 @@
                             <p class="card-text"><%= b.getNoteDescription() %></p>
                             <a href="DownloadServlet?fileName=<%= b.getFilePath() %>" class="btn btn-primary btn-sm"><i class="fas fa-download"></i>&nbsp; Download notes</a>
                             <ul class="list-group list-group-flush mt-2">
-                                <li class="list-group-item text-end"><span style="float: left;"><a href="" onclick="doLike(<%= b.getNoteId() %>,<%= userId %>)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
+                                <li class="list-group-item text-end"><span style="float: left;"><a href="#" onclick="doLike(<%= b.getNoteId() %>,<%= userId %>,<%= b.getUserId() %>)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
                                 <a href="show_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm">More Info</a>
                                 <li class="list-group-item text-center text-muted"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
                             </ul>
@@ -92,7 +106,46 @@
                         </div>
                     </div>
                 </div>
-                                <% } %>
+                                <% }} %>
+                 <!--Unpaid notes end-->
+                
+                <hr class="mt-5">
+                 <h2 class="mb-2 mt-2 text-start"><b>Paid notes</b></h2><br><br>
+                
+                <!--Paid notes start-->
+                <%
+                    List<Note> list1 = dao.getNotes(subjectid);
+                    for(Note b : list1){
+                        if(b.getNotePrice()>0)
+                        {
+                %>
+                <div class="col-lg-3  mt-4">
+                    <div class="card" style="border-color: #6B9B8A;">
+                        <div class="card-header" style="background-color: #6B9B8A; color: white; "><%= b.getNoteTitle() %></div>
+                        <div class="card-body">           
+                            <p class="card-text"><%= b.getNoteDescription() %></p>
+                            <p class="card-text p-1 border border-danger text-danger rounded-pill col-4 mb-2 " style="margin: auto;">₹ <%= b.getNotePrice() %></p>
+                            
+                            <a href="DownloadServlet?fileName=<%= b.getFilePath() %>" class="btn btn-primary btn-sm"><i class="fas fa-download"></i>&nbsp; Download notes</a>
+                            <ul class="list-group list-group-flush mt-2">
+                                <li class="list-group-item text-end"><span style="float: left;"><a href="#" onclick="doLike(<%= b.getNoteId() %>,<%= userId %>,<%= b.getUserId() %>)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
+                                <a href="show_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm">More Info</a>
+                                <li class="list-group-item text-center text-muted"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
+                            </ul>
+                            
+                            <!-- BUTTON -->
+                                <div class="form-group d-flex justify-content-center">
+                                    <a  href="edit_note.jsp?id=<%= b.getNoteId() %>" class="btn btn-success col-5 col-sm-3 col-lg-5  mt-2">Edit</a>                        
+                                    <a  href="DeleteNoteServlet?id=<%= b.getNoteId() %> " class="btn btn-dark col-5 col-sm-3 col-lg-5  mt-2 ms-2" >Delete</a>        
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                                <% }} %>
+                <!--Paid notes end-->
+                
+                <% } %>
+                
             </div>
             
             <!--Floating Button start-->
@@ -133,13 +186,20 @@
                             <input type="text" class="form-control form-control-sm" id="addnoteTitle" placeholder="Enter note title" name="ntitle" required="required">
                         </div>
 
-
                         <!-- NOTE DESCRIPTION -->
                         <div class="form-group col-12 mt-3">                     
                             <textarea class="form-control form-control-sm" id="addnoteDescription" rows="3" placeholder="Enter note description" name="ndescription" required="required"></textarea>
                         </div>
 
-           
+                            <div class="form-group col-12 mt-3">  
+                                Enter note price in ₹
+                                <input type="number" class="form-control form-control-sm" id="addnotePrice" placeholder="Enter note price in rupees" name="nprice" value="0">
+                            </div>
+                            
+                            <div class="form-group col-12 mt-3">                     
+                                <input type="text" class="form-control form-control-sm" id="addnoteRazor" placeholder="Enter razorpay key" name="nrazor">
+                            </div>
+
                         <!-- HIDDEN VALUES SENT  -->
                         
                         <!--Hidden data sending all the selected options-->
@@ -149,10 +209,11 @@
                         <input type="hidden" name="selectedSubject" id="selectedSubject" value="<%=subjectname %>"/>
                         <input type="hidden" name="selectedSubjectId" id="selectedSubjectId" value="<%=subjectid %>"/>
                         
+                        <input type="hidden"  name="uid" value="<%= us.getUserId() %>">
                         <input type="hidden"  name="uname" value="<%= us.getUserName() %>">
                         <input type="hidden"  name="uprofession" value="<%= us.getUserProfession() %>">
                         <input type="hidden"  name="ucollege" value="<%= us.getUserCollege() %>">
-              
+                                    
                         <!-- UPLOAD PDF -->
                         <div class="col-12 mt-3">
                             <span id="datalistInline" class="form-text">
@@ -205,7 +266,7 @@
             function actionToggle()
             {
                 var action=document.querySelector('.action');
-                action.classList.toggle('active')
+                action.classList.toggle('active');
             }
        </script>
         

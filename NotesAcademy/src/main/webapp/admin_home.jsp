@@ -218,9 +218,6 @@
                         <div class="form-group col-12  mt-3">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="catname" value="catname" required="required">
                                 <option value="" disabled selected hidden>Select Category</option>                               
-<!--                                <option value="Science">Science</option>
-                                <option value="Commerce">Commerce</option>
-                                <option value="Arts">Arts</option>-->
                             </select>
                         </div>
 
@@ -228,11 +225,6 @@
                         <div class="form-group col-12  mt-3">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example"  id="couname" value="couname" required="required">
                                 <option value="" disabled selected hidden>Select Course</option>
-<!--                                <option value="FYJC">FYJC</option>
-                                <option value="SYJC">SYJC</option>
-                                <option value="BSC">BSC</option>
-                                <option value="BSC CS">BSC CS</option>-->
-
                             </select>
                         </div>
 
@@ -240,9 +232,6 @@
                         <div class="form-group col-12  mt-3">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="cyear" value="cyear" required="required">
                                 <option value="" disabled selected hidden>Select Course Year</option>
-<!--                                <option value="First Year">First Year</option>
-                                <option value="Second Year">Second Year</option>
-                                <option value="Third Year">Third Year</option>-->
                             </select>
                         </div>
 
@@ -254,6 +243,15 @@
                             </select>
                         </div>
            
+                        <div class="form-group col-12 mt-3">  
+                                Enter note price in ₹
+                                <input type="number" class="form-control form-control-sm" id="addnotePrice" placeholder="Enter note price in rupees" name="nprice" value="0">
+                            </div>
+                            
+                            <div class="form-group col-12 mt-3">                     
+                                <input type="text" class="form-control form-control-sm" id="addnoteRazor" placeholder="Enter razorpay key" name="nrazor">
+                            </div>
+                        
                         <!-- HIDDEN VALUES SENT  -->
                         
                         <!--Hidden data sending all the selected options-->
@@ -263,6 +261,7 @@
                         <input type="hidden" name="selectedSubject" id="selectedSubject"/>
                         <input type="hidden" name="selectedSubjectId" id="selectedSubjectId"/>
                         
+                        <input type="hidden"  name="uid" value="<%= us.getUserId() %>">
                         <input type="hidden"  name="uname" value="<%= us.getUserName() %>">
                         <input type="hidden"  name="uprofession" value="<%= us.getUserProfession() %>">
                         <input type="hidden"  name="ucollege" value="<%= us.getUserCollege() %>">

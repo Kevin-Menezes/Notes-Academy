@@ -24,8 +24,10 @@ public class LikeServlet extends HttpServlet
  
             int noteId = Integer.parseInt(request.getParameter("noteId"));
             int userId = Integer.parseInt(request.getParameter("userId"));
+            int nuserId = Integer.parseInt(request.getParameter("nuserId"));
             System.out.println(noteId);
             System.out.println(userId);
+            System.out.println(nuserId);
             
            
 //            out.println("data from server");
@@ -38,12 +40,12 @@ public class LikeServlet extends HttpServlet
             {    
                 if(ldao.alreadyLikedByUser(noteId, userId))
                 {
-                    boolean f = ldao.deleteLike(noteId, userId);
+                    boolean f = ldao.deleteLike(noteId, userId,nuserId);
                     out.println(f);
                 }
                 else
                 {
-                    boolean f = ldao.insertLike(noteId, userId);
+                    boolean f = ldao.insertLike(noteId, userId,nuserId);
                     out.println(f);
                 }
                 

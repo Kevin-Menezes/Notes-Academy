@@ -71,7 +71,7 @@ public class CategoryDAOImpl implements CategoryDAO
             System.out.println("There is error in CategoryDAOImpl - getCategories : "+e);
         }
         
-        System.out.println("Categories : "+list);
+     
         return list;
      
     }
@@ -106,7 +106,7 @@ public class CategoryDAOImpl implements CategoryDAO
             System.out.println("There is error in CategoryDAOImpl - getCategoriesWithoutImg : "+e);
         }
         
-        System.out.println("Categories : "+list);
+
         return list;
 
     }

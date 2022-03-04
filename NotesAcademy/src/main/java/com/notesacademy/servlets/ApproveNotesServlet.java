@@ -64,6 +64,7 @@ public class ApproveNotesServlet extends HttpServlet
          String subjectYear = b.getSubjectYear();
          String subjectName = b.getSubjectName();
          String noteDate = b.getNoteDate();
+         int userId = b.getUserId();
          String userName = b.getUserName();
          String userProfession = b.getUserProfession();
          String userCollege = b.getUserCollege();
@@ -71,6 +72,8 @@ public class ApproveNotesServlet extends HttpServlet
          
          String fileName = filePath.substring(14);
          int subjectId = b.getSubject_id();
+         int notePrice = b.getNotePrice();
+         String noteRazor = b.getNoteRazor();
 
             String path = folderName + File.separator + fileName;
             System.out.println("FileName in NotesAddServlet:  "+fileName);
@@ -78,7 +81,7 @@ public class ApproveNotesServlet extends HttpServlet
   
             Files.copy(Paths.get(sourcePath + File.separator +fileName),Paths.get(uploadPath + File.separator +fileName) , StandardCopyOption.REPLACE_EXISTING);
             
-            Note n = new Note(noteTitle, noteDescription, categoryName, courseName, subjectYear, subjectName, noteDate,userName,userProfession, userCollege,path,subjectId);
+            Note n = new Note(noteTitle, noteDescription, categoryName, courseName, subjectYear, subjectName, noteDate,userId,userName,userProfession, userCollege,path,subjectId,notePrice,noteRazor);
  
             boolean f = dao.addNote(n); // Adding the note to the main database
  

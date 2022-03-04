@@ -57,6 +57,12 @@ public class AddNotesServlet extends HttpServlet
             String noteTitle  = req.getParameter("ntitle");
             String noteDescription  = req.getParameter("ndescription");
             
+            int notePrice = Integer.parseInt(req.getParameter("nprice"));
+            System.out.println("This is notePrice : "+notePrice);
+            
+            String noteRazor = req.getParameter("nrazor");
+            System.out.println("This is noteRazor : "+noteRazor);
+            
             String categoryName  = req.getParameter("selectedCategory");
             System.out.println("This is category name : "+categoryName);
             
@@ -72,6 +78,7 @@ public class AddNotesServlet extends HttpServlet
             int subjectId = Integer.parseInt(req.getParameter("selectedSubjectId"));
             System.out.println("This is subjectId : "+subjectId);
     
+            int userId = Integer.parseInt(req.getParameter("uid"));
             String userName  = req.getParameter("uname");
             String userProfession  = req.getParameter("uprofession");
             String userCollege  = req.getParameter("ucollege");
@@ -90,7 +97,7 @@ public class AddNotesServlet extends HttpServlet
             Files.copy(is, Paths.get(uploadPath + File.separator +fileName), StandardCopyOption.REPLACE_EXISTING);
             
             // WITHOUT ID
-            Note n = new Note(noteTitle, noteDescription, categoryName, courseName, subjectYear, subjectName, noteDate,userName,userProfession, userCollege,path,subjectId);
+            Note n = new Note(noteTitle, noteDescription, categoryName, courseName, subjectYear, subjectName, noteDate,userId,userName,userProfession, userCollege,path,subjectId,notePrice,noteRazor);        
             NoteDAOImpl dao = new NoteDAOImpl(DBConnection.getConnection()); // CONNECTS TO THE DATABASE 
             
             boolean f = dao.addNote(n);

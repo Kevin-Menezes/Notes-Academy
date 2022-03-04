@@ -259,6 +259,18 @@ nav a {
     
 }
 
+/* -------------------------------------- Recent notes ----------------------------------------------*/
+#notesitem:hover{
+    background-color: white;
+    cursor: default;
+}
+
+#notesdesc:hover{
+    background-color: white;
+    cursor: default;
+}
+
+
 /*------------------------------------------- Floating Button -----------------------------------*/
 .action
 {
@@ -337,8 +349,96 @@ nav a {
         color:white;
 }
 
+/*--------------------------------------Numbers button--------------------------------------------*/
+.box{
+    background: var(--green);
+}
+#counter
+{
+    font-size: 50px;
+    color: white;
+}
 
+.text
+{
+    font-size: 20px;
+}
 
+.counter-up{
+  background-color: white;
+  min-height: 38vh;
+  padding: 0 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+}
+.counter-up::before{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+  
+}
+.counter-up .content{
+  z-index: 0;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+ 
+}
+.counter-up .content .box{
+  width: calc(25% - 30px);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 20px;
+}
+.content .box .icon{
+  font-size: 40px;
+  color: black;
+}
+.content .box .counter{
+  font-size: 50px;
+  font-weight: 500;
+  color: white;
+  font-family: sans-serif;
+}
+.content .box .text{
+  font-weight: 400;
+  color: white;
+}
+@media screen and (max-width: 1036px) {
+  .counter-up{
+    padding: 50px 50px 0 50px;
+  }
+  .counter-up .content .box{
+    width: calc(50% - 30px);
+    margin-bottom: 50px;
+  }
+}
+@media screen and (max-width: 580px) {
+  .counter-up .content .box{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .wrapper{
+    padding: 20px;
+  }
+  .counter-up{
+    padding: 30px 20px 0 20px;
+  }
+}
 
 
 /*----------------------------------------------------------------------------------*/

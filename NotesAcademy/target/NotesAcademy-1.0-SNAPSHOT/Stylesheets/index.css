@@ -351,6 +351,16 @@ nav a {
 .box{
     background: var(--green);
 }
+#counter
+{
+    font-size: 50px;
+    color: white;
+}
+
+.text
+{
+    font-size: 20px;
+}
 
 .counter-up{
   background-color: white;
@@ -392,8 +402,8 @@ nav a {
   padding: 20px;
 }
 .content .box .icon{
-  font-size: 48px;
-  color: white;
+  font-size: 40px;
+  color: black;
 }
 .content .box .counter{
   font-size: 50px;

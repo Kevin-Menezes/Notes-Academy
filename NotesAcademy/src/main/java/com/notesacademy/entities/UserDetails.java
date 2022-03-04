@@ -10,6 +10,7 @@ public class UserDetails
     private String userEmail; 
     private String userProfession;
     private String userCollege;
+    private int userLikeCount;
 
     // Getter Setter
     public int getUserId() {
@@ -59,22 +60,30 @@ public class UserDetails
     public void setUserCollege(String userCollege) {
         this.userCollege = userCollege;
     }
+
+    public int getUserLikeCount() {
+        return userLikeCount;
+    }
+
+    public void setUserLikeCount(int userLikeCount) {
+        this.userLikeCount = userLikeCount;
+    }
     
     //Constructors
-
     public UserDetails() {
     }
 
-    public UserDetails(int userId, String userName, String userPassword, String userEmail, String userProfession, String userCollege) {
+    public UserDetails(int userId, String userName, String userPassword, String userEmail, String userProfession, String userCollege, int userLikeCount) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.userProfession = userProfession;
         this.userCollege = userCollege;
+        this.userLikeCount = userLikeCount;
     }
 
-    // Constructor without userId
+    // Without id and like count
     public UserDetails(String userName, String userPassword, String userEmail, String userProfession, String userCollege) {
         this.userName = userName;
         this.userPassword = userPassword;
@@ -83,10 +92,20 @@ public class UserDetails
         this.userCollege = userCollege;
     }
 
+    public UserDetails(String userName, String userPassword, String userEmail, String userProfession, String userCollege, int userLikeCount) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userProfession = userProfession;
+        this.userCollege = userCollege;
+        this.userLikeCount = userLikeCount;
+    }
+    
+
     // To String
     @Override
     public String toString() {
-        return "UserDetails{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userEmail=" + userEmail + ", userProfession=" + userProfession + ", userCollege=" + userCollege + '}';
+        return "UserDetails{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userEmail=" + userEmail + ", userProfession=" + userProfession + ", userCollege=" + userCollege + ", userLikeCount=" + userLikeCount + '}';
     }
-    
+
 }

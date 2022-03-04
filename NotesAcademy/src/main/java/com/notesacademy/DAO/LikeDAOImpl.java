@@ -17,7 +17,7 @@ public class LikeDAOImpl implements LikeDAO
     }
 
     @Override
-    public boolean insertLike(int noteId, int userId) 
+    public boolean insertLike(int noteId, int userId, int nuserId) 
     {
         boolean f = false;
         try 
@@ -32,6 +32,11 @@ public class LikeDAOImpl implements LikeDAO
             PreparedStatement ps_incLikeCount = con.prepareStatement(sql1);
             ps_incLikeCount.setInt(1,noteId);
             ps_incLikeCount.executeUpdate();
+            
+            String sql2 = "UPDATE user SET userLikeCount = userLikeCount + 1 WHERE userId = ?";
+            PreparedStatement ps_incUserLikeCount = con.prepareStatement(sql2);
+            ps_incUserLikeCount.setInt(1,nuserId);
+            ps_incUserLikeCount.executeUpdate();
             
             f=true;
             
@@ -100,7 +105,7 @@ public class LikeDAOImpl implements LikeDAO
 // --------------------------------------------------------------------------------
     
     @Override
-    public boolean deleteLike(int noteId, int userId) 
+    public boolean deleteLike(int noteId, int userId, int nuserId) 
     {
         boolean f = false;
         
@@ -116,6 +121,11 @@ public class LikeDAOImpl implements LikeDAO
             PreparedStatement ps_decLikeCount = con.prepareStatement(sql2);
             ps_decLikeCount.setInt(1,noteId);
             ps_decLikeCount.executeUpdate();
+            
+            String sql3 = "UPDATE user SET userLikeCount = userLikeCount - 1 WHERE userId = ?";
+            PreparedStatement ps_decUserLikeCount = con.prepareStatement(sql3);
+            ps_decUserLikeCount.setInt(1,nuserId);
+            ps_decUserLikeCount.executeUpdate();
             
             f = true;
         } 

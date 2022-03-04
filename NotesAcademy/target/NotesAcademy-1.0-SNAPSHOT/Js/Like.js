@@ -1,4 +1,4 @@
-function doLike(noteId,userId)
+function doLike(noteId,userId,nuserId)
 {
     console.log(noteId + " , " + userId)
     
@@ -6,6 +6,7 @@ function doLike(noteId,userId)
     const d = {
         noteId: noteId,
         userId: userId,
+        nuserId: nuserId,
         operation: 'like'
     }
     

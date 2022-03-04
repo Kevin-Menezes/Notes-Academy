@@ -156,7 +156,7 @@
                   
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <li class="dropdown-item">Hello <%= us.getUserName() %></li>
-                    <li class="dropdown-item"><a href="LogoutServlet">Log out</a></li>               
+                    <li class="dropdown-item"><a href="LogoutServlet" style="color: black; text-decoration: none;">Log out</a></li>               
                 </ul>
               </li>
             

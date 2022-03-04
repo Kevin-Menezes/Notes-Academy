@@ -50,6 +50,10 @@ public class NoteDAOImpl implements NoteDAO
                 n.setUserCollege(rs.getString(11));
                 n.setFilePath(rs.getString(12));
                 n.setSubject_id(rs.getInt(13));
+                n.setUserId(rs.getInt(15));
+                n.setNotePrice(rs.getInt(16));
+                n.setNoteRazor(rs.getString(17));
+                
                 
                 System.out.println(n);
                 list.add(n);
@@ -102,6 +106,9 @@ public class NoteDAOImpl implements NoteDAO
                 n.setUserCollege(rs.getString(11));
                 n.setFilePath(rs.getString(12));
                 n.setSubject_id(rs.getInt(13));
+                n.setUserId(rs.getInt(15));
+                n.setNotePrice(rs.getInt(16));
+                n.setNoteRazor(rs.getString(17));
                 
                 System.out.println(n);
                 list.add(n);
@@ -127,7 +134,7 @@ public class NoteDAOImpl implements NoteDAO
         
         try
         {
-         String sql = "INSERT INTO tempnotes(noteTitle,noteDescription,categoryName,courseName,subjectYear,subjectName,noteDate,userId,userName,userProfession,userCollege,pdfPath,subject_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+         String sql = "INSERT INTO tempnotes(noteTitle,noteDescription,categoryName,courseName,subjectYear,subjectName,noteDate,userId,userName,userProfession,userCollege,pdfPath,subject_id,notePrice,noteRazor) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
        
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -146,6 +153,8 @@ public class NoteDAOImpl implements NoteDAO
             ps.setString(12,n.getFilePath());
             ps.setInt(13,n.getSubject_id());
             //ps.setBytes(13,bytes);
+            ps.setInt(14,n.getNotePrice());
+            ps.setString(15,n.getNoteRazor());
         
             int i = ps.executeUpdate();
             
@@ -223,6 +232,8 @@ public class NoteDAOImpl implements NoteDAO
                 //Blob blob = rs.getBlob(14);
                 n.setFilePath(rs.getString(13));
                 n.setSubject_id(rs.getInt(14));
+                n.setNotePrice(rs.getInt(15));
+                n.setNoteRazor(rs.getString(16));
                 list.add(n);
          
                 //System.out.println(blob+"This is blob");
@@ -266,12 +277,17 @@ public class NoteDAOImpl implements NoteDAO
                 n.setSubjectYear(rs.getString(6));
                 n.setSubjectName(rs.getString(7));
                 n.setNoteDate(rs.getString(8));
-                n.setUserName(rs.getString(9));
-                n.setUserProfession(rs.getString(10));
-                n.setUserCollege(rs.getString(11));  
+                n.setUserId(rs.getInt(9));
+                n.setUserName(rs.getString(10));
+                n.setUserProfession(rs.getString(11));
+                n.setUserCollege(rs.getString(12));  
                 //Blob blob = rs.getBlob(12);
-                n.setFilePath(rs.getString(12));
-                n.setSubject_id(rs.getInt(13));
+                n.setFilePath(rs.getString(13));
+                n.setSubject_id(rs.getInt(14));
+                n.setNotePrice(rs.getInt(15));
+                n.setNoteRazor(rs.getString(16));
+
+                
   
             }
             
@@ -294,7 +310,7 @@ public class NoteDAOImpl implements NoteDAO
         
         try
         {
-         String sql = "INSERT INTO note(noteTitle,noteDescription,categoryName,courseName,subjectYear,subjectName,noteDate,userName,userProfession,userCollege,pdfPath,subject_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"; 
+         String sql = "INSERT INTO note(noteTitle,noteDescription,categoryName,courseName,subjectYear,subjectName,noteDate,userName,userProfession,userCollege,pdfPath,subject_id,userId,notePrice,noteRazor) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
        
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -310,6 +326,9 @@ public class NoteDAOImpl implements NoteDAO
             ps.setString(10,n.getUserCollege());
             ps.setString(11,n.getFilePath());
             ps.setInt(12,n.getSubject_id());
+            ps.setInt(13, n.getUserId());
+            ps.setInt(14,n.getNotePrice());
+            ps.setString(15,n.getNoteRazor());
             //ps.setBytes(13,bytes);
         
             int i = ps.executeUpdate();
@@ -390,6 +409,7 @@ public class NoteDAOImpl implements NoteDAO
                 //Blob blob = rs.getBlob(12);
                 n.setFilePath(rs.getString(12));
                 n.setSubject_id(rs.getInt(13));
+                n.setUserId(rs.getInt(15));
   
             }
             
@@ -502,6 +522,9 @@ public class NoteDAOImpl implements NoteDAO
                 n.setUserCollege(rs.getString(11));
                 n.setFilePath(rs.getString(12));
                 n.setSubject_id(rs.getInt(13));
+                n.setUserId(rs.getInt(15));
+                n.setNotePrice(rs.getInt(16));
+                n.setNoteRazor(rs.getString(17));
                 
                 System.out.println(n);
                 list.add(n);
@@ -549,6 +572,9 @@ public class NoteDAOImpl implements NoteDAO
                 n.setUserCollege(rs.getString(11));
                 n.setFilePath(rs.getString(12));
                 n.setSubject_id(rs.getInt(13));
+                n.setUserId(rs.getInt(15));
+                n.setNotePrice(rs.getInt(16));
+                n.setNoteRazor(rs.getString(17));
                 i++;
                 
                 System.out.println(n);
@@ -600,6 +626,9 @@ public class NoteDAOImpl implements NoteDAO
                 n.setUserCollege(rs.getString(11));
                 n.setFilePath(rs.getString(12));
                 n.setSubject_id(rs.getInt(13));
+                n.setUserId(rs.getInt(15));
+                n.setNotePrice(rs.getInt(16));
+                n.setNoteRazor(rs.getString(17));
                 
                 System.out.println(n);
                 list.add(n);
@@ -647,6 +676,9 @@ public class NoteDAOImpl implements NoteDAO
                 n.setUserCollege(rs.getString(11));
                 n.setFilePath(rs.getString(12));
                 n.setSubject_id(rs.getInt(13));
+                n.setUserId(rs.getInt(15));
+                n.setNotePrice(rs.getInt(16));
+                n.setNoteRazor(rs.getString(17));
                 
                 System.out.println(n);
                 list.add(n);
@@ -698,6 +730,9 @@ public class NoteDAOImpl implements NoteDAO
                 n.setUserCollege(rs.getString(11));
                 n.setFilePath(rs.getString(12));
                 n.setSubject_id(rs.getInt(13));
+                n.setUserId(rs.getInt(15));
+                n.setNotePrice(rs.getInt(16));
+                n.setNoteRazor(rs.getString(17));
                 
                 System.out.println(n);
                 list.add(n);

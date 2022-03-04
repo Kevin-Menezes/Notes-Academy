@@ -4,6 +4,8 @@
     Author     : nivek
 --%>
 
+<%@page import="com.notesacademy.DAO.UserDAOImpl"%>
+<%@page import="com.notesacademy.DAO.SubjectDAOImpl"%>
 <%@page import="com.notesacademy.entities.Note"%>
 <%@page import="com.notesacademy.DAO.LikeDAOImpl"%>
 <%@page import="com.notesacademy.DAO.NoteDAOImpl"%>
@@ -35,8 +37,6 @@
         <%@ include file="Components/Bootstrap.jsp"%> 
         <link rel="stylesheet" href="Stylesheets/index.css">    
          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>     
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
     </head>
 
     <body>
@@ -85,6 +85,7 @@
                         <!--Category and Course Classes-->
                         <% CategoryDAOImpl daocat = new CategoryDAOImpl(DBConnection.getConnection());
                             CourseDAOImpl daocou = new CourseDAOImpl(DBConnection.getConnection());
+                            int coucount = daocou.getCoursesCount();
 
   //                         Loop 1 - Categories loop
                             List<Category> listcat = daocat.getCategories();
@@ -109,48 +110,11 @@
                             <ul class="list-group list-group-flush ">
                                 <!--Sending category name , course id and course name to subject.jsp through the url-->
                                 <a href="subjects.jsp?category=<%=b.getCategoryName()%>&courseid=<%=c.getCourseId()%>&course=<%=c.getCourseName().replaceAll("\\s+", "-")%>" class="card-link"><li class="list-group-item listitem"><%=c.getCourseName()%></li></a>
-
-
-                                <!--                                <li class="list-group-item"><a href="#" class="card-link">SYJC</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BSc</a></li>
-                                                                <li class="list-group-item"><a href="bachelor_of_science_computer_science.jsp" class="card-link">BSc CS</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BSc IT</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BSc Arch</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BCA</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BTech</a></li>-->
+              
                             </ul>
                             <% } %> <!-- Loop 2 end-->
                         </div>
                         <% }%> <!-- Loop 1 end-->
-                        
-                        <!-- COMMERCE -->
-                        <!--                        <div class="card mt-3 mt-lg-0 shadow-lg" style="width: 24rem;"> BOOTSTRAP CARD
-                                                    <img src="Stylesheets/Commerce.png" class="card-img-top" alt="Commerce based img" height="256">
-                                                    
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item"><a href="#" class="card-link">FYJC</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">SYJC</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BCom</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BBA</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">CA</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">CS</a></li>
-                        
-                                                    </ul>
-                                                </div>-->
-
-                        <!-- ARTS -->
-                        <!--                        <div class="card mt-3 mt-xl-0 shadow-lg" style="width: 24rem;"> BOOTSTRAP CARD
-                                                    <img src="Stylesheets/Arts.jpeg" class="card-img-top" alt="Arts based img" height="256">
-                                                   
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item"><a href="#" class="card-link">FYJC</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">SYJC</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BA</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BMS</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BFA</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BEM</a></li>
-                                                    </ul>
-                                                </div>-->
 
                     </div>
                 </div>
@@ -164,6 +128,8 @@
             <%
                     NoteDAOImpl dao = new NoteDAOImpl(DBConnection.getConnection());
                     LikeDAOImpl ldao = new LikeDAOImpl(DBConnection.getConnection());
+                    
+                    int userId = 0;
 
                     List<Note> list = dao.getAllNotes();
                     for(Note b : list){
@@ -174,13 +140,35 @@
                         <div class="card-header" style="background-color: #6B9B8A; color: white; "><%= b.getNoteTitle() %></div>
                         <div class="card-body">           
                             <p class="card-text" style="padding: 0;"><%= b.getNoteDescription() %></p>
+                            
+                            <%
+                                if(b.getNotePrice()==0)
+                                {
+                              %>
                             <a href="DownloadServlet?fileName=<%= b.getFilePath() %>" class="btn btn-primary btn-sm"><i class="fas fa-download"></i>&nbsp; Download notes</a>
                             
                             <ul class="list-group list-group-flush mt-2 ">
-                                <li class="list-group-item text-end" id="notesitem"><span style="float: left;"><a href="#" onclick="doLike(<%= b.getNoteId() %>,0)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
+                                <li class="list-group-item text-end" id="notesitem"><span style="float: left;"><a href="" onclick="doLike(<%= b.getNoteId() %>,<%= userId %>,<%= b.getUserId() %>)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
                                 <a href="show_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm">More Info</a>
                                 <li class="list-group-item text-center text-muted" id="notesdesc"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
                             </ul>
+                            <%
+                                }
+                                else
+                                {
+                             %>
+                                    <!--Razorpay not signed in-->
+                                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                   <a onclick="razorPopupNS(<%= b.getNotePrice() %>,'<%= b.getNoteRazor() %>','<%= b.getFilePath() %>','<%= b.getUserName() %>','<%= b.getNoteTitle() %>')" class="btn btn-outline-danger rounded-pill col-4  p-1" style="margin: auto">Pay ₹<%= b.getNotePrice() %></a>
+
+                                    <ul class="list-group list-group-flush mt-2">
+                                        <li class="list-group-item text-end" id="notesitem"><span style="float: left;"><a href="" onclick="doLike(<%= b.getNoteId() %>,<%= userId %>,<%= b.getUserId() %>)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
+                                        <a href="show_paid_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm">More Info</a>
+                                        <li class="list-group-item text-center text-muted" id="notesdesc"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
+                                    </ul>
+                            <%
+                                }
+                             %>
                             
                         </div>
                     </div>
@@ -201,64 +189,108 @@
             </div>
             <!--Floating Button end-->
             
+            <% 
+                 SubjectDAOImpl daosub = new SubjectDAOImpl(DBConnection.getConnection());
+                 int subcount = daosub.getSubjectsCount();
+                 
+                 NoteDAOImpl daonote = new NoteDAOImpl(DBConnection.getConnection());
+                 int notecount = daonote.getNotesCount();
+                 
+                 UserDAOImpl daouser = new UserDAOImpl(DBConnection.getConnection());
+                 int usercount = daouser.getUsersCount();
+
+             %>
             <!-- Number cards start -->
             <div class="row text-center">
                 <h2 class="mb-0 mt-4 subjects-available" >Main Highlights</h2>
                 <div class="counter-up">
                     <div class="content">
                       <div class="box">
-                        <div class="icon"><i class="fas fa-history"></i></div>
-                        <div class="counter">724</div>
-                        <div class="text">Working Hours</div>
+                        <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div id="counter" data-animateDuration="5000"><%=coucount %></div>
+                        <div class="text">Courses Listed</div>
                       </div>
                       <div class="box">
-                        <div class="icon"><i class="fas fa-gift"></i></div>
-                        <div class="counter">508</div>
-                        <div class="text">Completed Projects</div>
+                        <div class="icon"><i class="fas fa-folder-open"></i></div>
+                        <div  id="counter" data-animateDuration="5000"><%=subcount %></div>
+                        <div class="text">Subjects Available</div>
+                      </div>
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-book-open"></i></div>
+                        <div id="counter" data-animateDuration="5000"><%=notecount %></div>
+                        <div class="text">Notes Uploaded</div>
                       </div>
                       <div class="box">
                         <div class="icon"><i class="fas fa-users"></i></div>
-                        <div class="counter">436</div>
-                        <div class="text">Happy Clients</div>
-                      </div>
-                      <div class="box">
-                        <div class="icon"><i class="fas fa-award"></i></div>
-                        <div class="counter">120</div>
-                        <div class="text">Awards Received</div>
+                        <div id="counter" data-animateDuration="5000"><%=usercount %></div>
+                        <div class="text">Benefitted Users</div>
                       </div>
                     </div>
                 </div>
             </div>
+            <!-- Number cards end -->
   
         </div>
               
+        <!--Footer-->
         <div class="bg-dark">
                 <%@include file="footer.jsp" %>
         </div>                       
         
-                                
-                                
-                                <script>
-  $(document).ready(function(){
-        $('.counter').counterUp({
-          delay: 10,
-          time: 1200
-        });
-        
-  });
+ <!-- Number count animation using javascript -->                                                              
+<script>
+
+        const initAnimatedCounts = () => {
+          const ease = (n) => {
+            // https://github.com/component/ease/blob/master/index.js
+            return --n * n * n + 1;
+          };
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // Once this element is in view and starts animating, remove the observer,
+                // because it should only animate once per page load.
+                observer.unobserve(entry.target);
+                const countToString = entry.target.getAttribute('data-countTo');
+                const countTo = parseFloat(countToString);
+                const duration = parseFloat(entry.target.getAttribute('data-animateDuration'));
+                const countToParts = countToString.split('.');
+                const precision = countToParts.length === 2 ? countToParts[1].length : 0;
+                const startTime = performance.now();
+                const step = (currentTime) => {
+                  const progress = Math.min(ease((currentTime  - startTime) / duration), 1);
+                  entry.target.textContent = (progress * countTo).toFixed(precision);
+                  if (progress < 1) {
+                    animationFrame = window.requestAnimationFrame(step);
+                  } else {
+                    window.cancelAnimationFrame(animationFrame);
+                  }
+                };
+                let animationFrame = window.requestAnimationFrame(step);
+              }
+            });
+          });
+          document.querySelectorAll('[data-animateDuration]').forEach((target) => {
+            target.setAttribute('data-countTo', target.textContent);
+            target.textContent = '0';
+            observer.observe(target);
+          });
+        };
+        initAnimatedCounts();
+
   </script>
 
     <!-- JQUERY , POPPER , BOOTSTRAP - USE SAME ORDER -->
-
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 
-
-    
+ 
     <!--Javascript validation for Signup Password and the alert for add notes-->
         <script type="text/javascript" src="Js/SignupValidation.js"></script>
+        
+        <!--Javascript for Likes-->
+        <script src="Js/Like.js"></script>
 
         <!--For the floating button toggle-->
         <script type="text/javascript">
@@ -268,7 +300,10 @@
                 action.classList.toggle('active');
             }
        </script>
+       
+       <!--Razorpay javascript-->
+         <script src="Js/RazorPayNotSignedIn.js"></script>
+       
 
 </body>
-
 </html>

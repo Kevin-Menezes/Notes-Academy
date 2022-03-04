@@ -4,6 +4,11 @@
     Author     : nivek
 --%>
 
+<%@page import="com.notesacademy.DAO.UserDAOImpl"%>
+<%@page import="com.notesacademy.DAO.SubjectDAOImpl"%>
+<%@page import="com.notesacademy.entities.Note"%>
+<%@page import="com.notesacademy.DAO.LikeDAOImpl"%>
+<%@page import="com.notesacademy.DAO.NoteDAOImpl"%>
 <%@page import="com.notesacademy.entities.Category"%>
 <%@page import="com.notesacademy.DAO.CategoryDAOImpl"%>
 <%@page import="com.notesacademy.entities.Message"%>
@@ -16,6 +21,8 @@
 
         HttpSession s = request.getSession();
         UserDetails us = (UserDetails) session.getAttribute("userdetails");
+        
+        int UserTotalLikes = 3;
         
         if(us==null)
         {
@@ -38,7 +45,7 @@
         <!-- Bootstrap and Font Awesome links -->
         <%@ include file="Components/Bootstrap.jsp"%>
         <link rel="stylesheet" href="Stylesheets/home.css">
-   
+
     </head>
     <body>
         <!-- Navbar -->
@@ -54,7 +61,7 @@
                         <h1 class="lets-note-it">Let's note it together.</h1>
                         <h5>College notes available here</h5>
                         <a id="addnotesbtn" class="btn px-4 py-2 mt-4" data-bs-toggle="modal"  data-bs-target="#sendnotesModal"><b><span>Add notes </span></b></a>
-                        <a id="recentnotesbtn" class="btn  px-4 py-2 mt-4"><b><span>View recent posts </span></b></a>
+                        <a href="#recentsection" id="recentnotesbtn" class="btn  px-4 py-2 mt-4"><b><span>View recent posts </span></b></a>
                     </div>  
                     <div class="col col-sm"></div>
 
@@ -101,9 +108,6 @@
                         <div class="form-group col-12  mt-3">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="catname" value="catname" required="required">
                                 <option value="" disabled selected hidden>Select Category</option>                               
-<!--                                <option value="Science">Science</option>
-                                <option value="Commerce">Commerce</option>
-                                <option value="Arts">Arts</option>-->
                             </select>
                         </div>
 
@@ -111,11 +115,6 @@
                         <div class="form-group col-12  mt-3">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example"  id="couname" value="couname" required="required">
                                 <option value="" disabled selected hidden>Select Course</option>
-<!--                                <option value="FYJC">FYJC</option>
-                                <option value="SYJC">SYJC</option>
-                                <option value="BSC">BSC</option>
-                                <option value="BSC CS">BSC CS</option>-->
-
                             </select>
                         </div>
 
@@ -123,9 +122,6 @@
                         <div class="form-group col-12  mt-3">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="cyear" value="cyear" required="required">
                                 <option value="" disabled selected hidden>Select Course Year</option>
-<!--                                <option value="First Year">First Year</option>
-                                <option value="Second Year">Second Year</option>
-                                <option value="Third Year">Third Year</option>-->
                             </select>
                         </div>
 
@@ -136,6 +132,26 @@
 
                             </select>
                         </div>
+                        
+                        <% 
+                                // This is to give price to the note when the user has a total of more than 3 likes
+                                if(us.getUserLikeCount()>=UserTotalLikes)
+                                { 
+                                    
+                            %>
+                            
+                            <div class="form-group col-12 mt-3">      
+                                Enter note price in ₹
+                                <input type="number" class="form-control form-control-sm" id="addnotePrice" placeholder="Enter note price in rupees" name="nprice" value="0">
+                            </div>
+                            
+                            <div class="form-group col-12 mt-3">                     
+                                <input type="text" class="form-control form-control-sm" id="addnoteRazor" placeholder="Enter razorpay key" name="nrazor">
+                            </div>
+                            
+                            <%
+                                }
+                             %>
            
                         <!-- HIDDEN VALUES SENT  -->
                         
@@ -150,6 +166,7 @@
                         <input type="hidden"  name="uname" value="<%= us.getUserName() %>">
                         <input type="hidden"  name="uprofession" value="<%= us.getUserProfession() %>">
                         <input type="hidden"  name="ucollege" value="<%= us.getUserCollege() %>">
+                        <input type="hidden"  name="nprice" value="0">
               
                         <!-- UPLOAD PDF -->
                         <div class="col-12 mt-3">
@@ -194,6 +211,7 @@
                         <!--Category and Course Classes-->
                         <% CategoryDAOImpl daocat = new CategoryDAOImpl(DBConnection.getConnection());
                             CourseDAOImpl daocou = new CourseDAOImpl(DBConnection.getConnection());
+                            int coucount = daocou.getCoursesCount();
 
   //                         Loop 1 - Categories loop
                             List<Category> listcat = daocat.getCategories();
@@ -218,54 +236,73 @@
                             <ul class="list-group list-group-flush">
                                 <!--Sending category name , course id and course name to subject.jsp through the url-->
                                 <a href="subjects.jsp?category=<%=b.getCategoryName()%>&courseid=<%=c.getCourseId()%>&course=<%=c.getCourseName().replaceAll("\\s+", "-")%>" class="card-link"><li class="list-group-item"><%=c.getCourseName()%></li></a>
-
-
-                                <!--                                <li class="list-group-item"><a href="#" class="card-link">SYJC</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BSc</a></li>
-                                                                <li class="list-group-item"><a href="bachelor_of_science_computer_science.jsp" class="card-link">BSc CS</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BSc IT</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BSc Arch</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BCA</a></li>
-                                                                <li class="list-group-item"><a href="#" class="card-link">BTech</a></li>-->
+                        
                             </ul>
                             <% } %> <!-- Loop 2 end-->
                         </div>
                         <% }%> <!-- Loop 1 end-->
-                        
-                        <!-- COMMERCE -->
-                        <!--                        <div class="card mt-3 mt-lg-0 shadow-lg" style="width: 24rem;"> BOOTSTRAP CARD
-                                                    <img src="Stylesheets/Commerce.png" class="card-img-top" alt="Commerce based img" height="256">
-                                                    
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item"><a href="#" class="card-link">FYJC</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">SYJC</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BCom</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BBA</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">CA</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">CS</a></li>
-                        
-                                                    </ul>
-                                                </div>-->
-
-                        <!-- ARTS -->
-                        <!--                        <div class="card mt-3 mt-xl-0 shadow-lg" style="width: 24rem;"> BOOTSTRAP CARD
-                                                    <img src="Stylesheets/Arts.jpeg" class="card-img-top" alt="Arts based img" height="256">
-                                                   
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item"><a href="#" class="card-link">FYJC</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">SYJC</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BA</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BMS</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BFA</a></li>
-                                                        <li class="list-group-item"><a href="#" class="card-link">BEM</a></li>
-                                                    </ul>
-                                                </div>-->
 
                     </div>
                 </div>
+                <!-- Subjects Available end -->
+                
+                <!--Recent notes start-->
+            <br >
+            <div id="recentsection"></div>
+
+            <h2  class="mb-2 mt-5 subjects-available" >Recently added notes</h2>
+            <%
+                    NoteDAOImpl dao = new NoteDAOImpl(DBConnection.getConnection());
+                    LikeDAOImpl ldao = new LikeDAOImpl(DBConnection.getConnection());
+
+                    List<Note> list = dao.getAllNotes();
+                    for(Note b : list){
+                %>
+                
+                <div class="col-lg-3  mt-4" >
+                    <div class="card shadow-lg">
+                        <div class="card-header" style="background-color: #6B9B8A; color: white; "><%= b.getNoteTitle() %></div>
+                        <div class="card-body">           
+                            <p class="card-text" style="padding: 0;"><%= b.getNoteDescription() %></p>
+                            
+                            <%
+                                if(b.getNotePrice()==0)
+                                {
+                              %>
+                            <a href="DownloadServlet?fileName=<%= b.getFilePath() %>" class="btn btn-primary btn-sm"><i class="fas fa-download"></i>&nbsp; Download notes</a>
+                            
+                            <ul class="list-group list-group-flush mt-2 ">
+                                <li class="list-group-item text-end" id="notesitem"><span style="float: left;"><a href="" onclick="doLike(<%= b.getNoteId() %>,<%= us.getUserId() %>,<%= b.getUserId() %>)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
+                                <a href="show_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm">More Info</a>
+                                <li class="list-group-item text-center text-muted" id="notesdesc"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
+                            </ul>
+                            
+                            <%
+                                }
+                                else
+                                {
+                             %>
+                                   <!--Razorpay signed in-->
+                                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                   <a onclick="razorPopup(<%= b.getNotePrice() %>,'<%= b.getNoteRazor() %>','<%= b.getFilePath() %>','<%= b.getUserName() %>','<%= b.getNoteTitle() %>','<%= us.getUserName() %>','<%= us.getUserEmail() %>')" class="btn btn-outline-danger rounded-pill col-4  p-1" style="margin: auto">Pay ₹<%= b.getNotePrice() %></a>
+
+                                    <ul class="list-group list-group-flush mt-2">
+                                        <li class="list-group-item text-end" id="notesitem"><span style="float: left;"><a href="" onclick="doLike(<%= b.getNoteId() %>,<%= us.getUserId() %>,<%= b.getUserId() %>)" class="btn btn-outline-dark btn-sm"><i class="far fa-thumbs-up"></i>&nbsp; <%= ldao.countLike(b.getNoteId()) %></a></span><small class="text-muted"><%= b.getNoteDate() %></small></li>       
+                                        <a href="show_paid_pdf.jsp?fileName=<%= b.getFilePath() %>" class="btn btn-outline-dark btn-sm">More Info</a>
+                                        <li class="list-group-item text-center text-muted" id="notesdesc"><%= b.getUserName() %> - <%= b.getUserProfession() %> - <%= b.getUserCollege() %></li>        
+                                    </ul>
+                            <%
+                                }
+                             %>
+                            
+                        </div>
+                    </div>
+                </div>
+                                <% } %>
+                                <!--Recent notes end-->
+
             </div>
-             <!-- Subjects Available end -->
-                        
+        
             <!--Floating Button start-->
             <div class="action"  onClick="actionToggle();">
                 <span class="justify-content-center">+</span>
@@ -276,6 +313,47 @@
                 </ul>        
             </div>
             <!--Floating Button end-->
+            
+            <% 
+                 SubjectDAOImpl daosub = new SubjectDAOImpl(DBConnection.getConnection());
+                 int subcount = daosub.getSubjectsCount();
+                 
+                 NoteDAOImpl daonote = new NoteDAOImpl(DBConnection.getConnection());
+                 int notecount = daonote.getNotesCount();
+                 
+                 UserDAOImpl daouser = new UserDAOImpl(DBConnection.getConnection());
+                 int usercount = daouser.getUsersCount();
+
+             %>
+            <!-- Number cards start -->
+            <div class="row text-center">
+                <h2 class="mb-0 mt-4 subjects-available" >Main Highlights</h2>
+                <div class="counter-up">
+                    <div class="content">
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div id="counter" data-animateDuration="5000"><%=coucount %></div>
+                        <div class="text">Courses Listed</div>
+                      </div>
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-folder-open"></i></div>
+                        <div  id="counter" data-animateDuration="5000"><%=subcount %></div>
+                        <div class="text">Subjects Available</div>
+                      </div>
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-book-open"></i></div>
+                        <div id="counter" data-animateDuration="5000"><%=notecount %></div>
+                        <div class="text">Notes Uploaded</div>
+                      </div>
+                      <div class="box">
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <div id="counter" data-animateDuration="5000"><%=usercount %></div>
+                        <div class="text">Benefitted Users</div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Number cards end -->
                         
         </div>
                         
@@ -283,23 +361,71 @@
             <%@include file="footer.jsp" %>
         </div>     
 
-    
-        
+<!-- Number count animation using javascript -->                                                              
+<script>
 
+        const initAnimatedCounts = () => {
+          const ease = (n) => {
+            // https://github.com/component/ease/blob/master/index.js
+            return --n * n * n + 1;
+          };
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // Once this element is in view and starts animating, remove the observer,
+                // because it should only animate once per page load.
+                observer.unobserve(entry.target);
+                const countToString = entry.target.getAttribute('data-countTo');
+                const countTo = parseFloat(countToString);
+                const duration = parseFloat(entry.target.getAttribute('data-animateDuration'));
+                const countToParts = countToString.split('.');
+                const precision = countToParts.length === 2 ? countToParts[1].length : 0;
+                const startTime = performance.now();
+                const step = (currentTime) => {
+                  const progress = Math.min(ease((currentTime  - startTime) / duration), 1);
+                  entry.target.textContent = (progress * countTo).toFixed(precision);
+                  if (progress < 1) {
+                    animationFrame = window.requestAnimationFrame(step);
+                  } else {
+                    window.cancelAnimationFrame(animationFrame);
+                  }
+                };
+                let animationFrame = window.requestAnimationFrame(step);
+              }
+            });
+          });
+          document.querySelectorAll('[data-animateDuration]').forEach((target) => {
+            target.setAttribute('data-countTo', target.textContent);
+            target.textContent = '0';
+            observer.observe(target);
+          });
+        };
+        initAnimatedCounts();
+
+  </script>
+        
+        
+        
     <!-- JQuery - Popper - Bootstrap -->
     <%@include file="Components/JqueryPopperBootstrap.jsp" %>
  
     <!--JQuery and Ajax for Asynchronous Add Notes (JQuery should always be used after the document has been loaded)-->
      <script type="text/javascript" src="Js/AddNotes.js"></script>
      
+     <!--Javascript for Likes-->
+        <script src="Js/Like.js"></script>
+     
      <!--For the floating button toggle-->
         <script type="text/javascript">
             function actionToggle()
             {
                 var action=document.querySelector('.action');
-                action.classList.toggle('active')
+                action.classList.toggle('active');
             }
        </script>
+       
+       <!--Razorpay javascript-->
+         <script src="Js/RazorPay.js"></script>
    
     </body>
 </html>

@@ -72,6 +72,7 @@ public class UserDAOImpl implements UserDAO
                 us.setUserEmail(rs.getString(4));
                 us.setUserProfession(rs.getString(5));
                 us.setUserCollege(rs.getString(6));          
+                us.setUserLikeCount(rs.getInt(7));
             }
         
         }

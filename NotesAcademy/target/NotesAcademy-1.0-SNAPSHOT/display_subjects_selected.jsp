@@ -67,6 +67,12 @@
                             List<Subject> listsub1 = daosub.getFirstYearSubjects(courseid);
                              int subjectNo = 1;
                             if (listsub1.isEmpty()) {
+                                
+                          %>
+                          
+                          <a href="add_subject.jsp?couid=<%=courseid %>&syear=First-Year" id="addsubjectsbtn" class="btn px-4 py-2 mt-4 mx-auto"><b><span>Add subject in First Year</span></b></a>
+                          
+                          <%
 
                             } else {
 
@@ -114,6 +120,12 @@
                             List<Subject> listsub2 = daosub.getSecondYearSubjects(courseid);
                             subjectNo = 1;
                             if (listsub2.isEmpty()) {
+                                
+                                 %>
+                          
+                          <a href="add_subject.jsp?couid=<%=courseid %>&syear=Second-Year" id="addsubjectsbtn" class="btn px-4 py-2 mt-4 mx-auto"><b><span>Add subject in Second Year</span></b></a>
+                          
+                          <%
 
                             } else {
 
@@ -162,7 +174,13 @@
                             List<Subject> listsub3 = daosub.getThirdYearSubjects(courseid);
                             subjectNo = 1;
                             if (listsub3.isEmpty()) {
-
+                                
+                                 %>
+                          
+                          <a href="add_subject.jsp?couid=<%=courseid %>&syear=Third-Year" id="addsubjectsbtn" class="btn px-4 py-2 mt-4 mx-auto"><b><span>Add subject in Third Year</span></b></a>
+                          
+                          <%
+                                
                             } else {
 
                         %>
@@ -209,6 +227,12 @@
                             List<Subject> listsub4 = daosub.getFourthYearSubjects(courseid);
                             subjectNo = 1;
                             if (listsub4.isEmpty()) {
+                                
+                                 %>
+                          
+                          <a href="add_subject.jsp?couid=<%=courseid %>&syear=Fourth-Year" id="addsubjectsbtn" class="btn px-4 py-2 mt-4 mx-auto"><b><span>Add subject in Fourth Year</span></b></a>
+                          
+                          <%
 
                             } else {
 

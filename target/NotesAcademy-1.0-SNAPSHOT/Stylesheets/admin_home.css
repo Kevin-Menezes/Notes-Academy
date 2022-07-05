@@ -1,0 +1,188 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+/* Declaring Variables */
+:root {
+    --green: #6B9B8A;
+    --offwhite: #F8F8F6;
+    --brightgreen: #C9FCE9;
+    --darkgreen:#364B44;
+    --darkgrey: #6C6C6C;
+}
+
+/*---------------------------------------Navbar-------------------------------------------*/
+
+.notes-academy{
+    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+}
+
+/* Navbar color */
+.navbar-dark {
+    background-color: var(--green);
+}
+
+nav a {
+    color: white;
+}
+
+/* Navbar Dropdown*/
+.dropdown-menu {
+    /*  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);*/
+    border: none;
+    border-radius: 5px;
+    background-color: var(--green);
+}
+
+/* Navbar menu dropdown responsive text */
+@media (max-width:480px) {
+    .dropdown-menu {
+        width: 99%;
+    }
+
+    .dropdown-menu>li>a {
+        white-space: normal;
+    }
+}
+
+/* Dropdown item hover */
+.dropdown-item:hover {
+    background-color: white;
+}
+
+.nav-item:last-child {
+    padding-right: 5em;
+}
+
+.nav-item {
+    padding: 0em 0.5em;
+}
+
+/*Bottom padding for the alert*/
+.alert{
+    margin-bottom: 0px;
+}
+
+/*-----------------------------------Navbar Modal-----------------------------------------------*/
+
+/* Modal */
+.modal-header{
+    background-color: var(--green);
+}
+
+.modal-body button{
+    background-color: var(--green);
+    border: 1px solid var(--green);
+    color: white;
+}
+
+.modal-body button:hover {
+    background-color: black;
+}
+
+.modal-footer button:hover {
+    background-color: var(--green);
+    border: 1px solid var(--green);
+}
+
+/*-------------------------------------------------------------------------- ADMIN BODY-------------------------------------------------------------------- */
+
+.adminhome-Cards{
+    margin-top: 6em;
+}
+
+.card{
+    box-shadow: 0px 2px 45px 0px rgba(0, 0, 0, 0.1);
+    border-color: var(--green);
+    
+}
+.card:hover{
+    
+    box-shadow: none;
+    border: none;
+}  
+
+body{
+    background-color: var(--offwhite);
+}
+
+/*------------------------------------------- Floating Button -----------------------------------*/
+.action
+{
+    position:fixed;
+    bottom:30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background:var(--green);
+    border-radius:50%;
+    cursor:pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+         
+}
+.action span{
+    
+      postion:relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      color: white;
+      font-size: 2em;
+      transition: 0.3s ease-in-out;
+         
+}
+.action:active  span
+{
+    transform:rotate(135deg);
+    
+}
+
+/*This is the white part*/
+.action ul{
+    position:absolute;
+    bottom:55px;
+    right:5px;
+    background:var(--green);
+    min-width:150px;
+    padding:20px;
+    border-radius:10px;
+    opacity:0;
+    visibility:hidden;
+    transition:0.2s;
+    
+}
+.action.active ul 
+{
+    bottom:65px;
+    opacity: 1;
+    visibility: visible;
+    transition: 0.3s;
+    
+    
+}
+.action.active ul li
+{
+    list-style:none;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    padding:10px 0;
+    transition: 0.3s;
+    
+}
+.action ul li:hover{
+    font-weight:600;
+
+}
+.action ul li:not(:last-child)
+{
+    border-bottom:1px solid rgba(0,0,0,0.2);
+}
+
+.action ul li a{
+    text-decoration: none;
+        color:white;
+}

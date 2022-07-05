@@ -1,0 +1,541 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/* Declaring Variables */
+:root {
+    --green: #6B9B8A;
+    --offwhite: #F8F8F6;
+    --brightgreen: #C9FCE9;
+    --darkgreen:#364B44;
+    --darkgrey: #6C6C6C;
+}
+
+/*-----------------------------------------Header-------------------------------------------*/
+
+/* This was not there in Bootstrap 5 ....so i custom made it for the header */
+.jumbotron {
+    margin-top: 0em;
+    padding: 10em 0em 10em 0em;
+    background-color: white;
+/*      border-bottom: 1px solid var(--green);*/
+    box-shadow: 0 0 90px rgba(107,155,138,0.3);
+}
+
+/* Header padding */
+.row-header {
+    margin: 0px auto;
+    padding: 0px auto;
+}
+
+.lets-note-it{
+    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 350%;
+}
+
+#addnotesbtn{
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    width: 150px;
+    display: inline-block;
+    transition: all 0.5s;
+  }
+
+/* WORDS ON BUTTON */
+#addnotesbtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+/* THE TWO ARROWS ON RIGHT */
+#addnotesbtn span:after {
+    content: '+';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+/* HOVER OVER BUTTON */
+#addnotesbtn:hover span {
+    padding-right: 15px;
+}
+
+/* AFTER HOVER OVER BUTTON */
+#addnotesbtn:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/*-------------------------------------------*/
+
+#recentnotesbtn{
+    border: 1px solid var(--green);
+    color: var(--green);
+    width: 200px;
+    display: inline-block;
+    transition: all 0.5s;
+}
+
+/* WORDS ON BUTTON */
+#recentnotesbtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+/* THE TWO ARROWS ON RIGHT */
+#recentnotesbtn span:after {
+    content: '\2193';
+    position: absolute;
+    opacity: 0;
+    top: 0px;
+    right: -20px;
+    transition: 0.5s;
+}
+
+/* HOVER OVER BUTTON */
+#recentnotesbtn:hover span {
+    padding-right: 15px;
+}
+
+/* AFTER HOVER OVER BUTTON */
+#recentnotesbtn:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/*-----------------------------------------------------RESPONSIVE---------------------------------------------------*/
+@media (min-width: 0px) and (max-width: 768px){
+    .lets-note-it{
+        font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 250%;
+    }
+
+    .subjects-available{
+        font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 250%;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 574px){
+    .jumbotron{
+        padding: 6em 0em 10em 0em;
+    }
+}
+
+/*---------------------------------------Navbar-------------------------------------------*/
+
+.notes-academy{
+    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+}
+
+/* Navbar color */
+.navbar-dark {
+    background-color: var(--green);
+}
+
+nav a {
+    color: white;
+}
+
+/* Navbar Dropdown*/
+.dropdown-menu {
+    /*  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);*/
+    border: none;
+    border-radius: 5px;
+    background-color: var(--green);
+}
+
+/* Navbar menu dropdown responsive text */
+@media (max-width:480px) {
+    .dropdown-menu {
+        width: 99%;
+    }
+
+    .dropdown-menu>li>a {
+        white-space: normal;
+    }
+}
+
+/* Dropdown item hover */
+.dropdown-item:hover {
+    background-color: white;
+}
+
+.nav-item:last-child {
+    padding-right: 5em;
+}
+
+.nav-item {
+    padding: 0em 0.5em;
+}
+
+/*Bottom padding for the alert*/
+.alert{
+    margin-bottom: 0px;
+}
+
+/*-----------------------------------Navbar Modal-----------------------------------------------*/
+
+/* Modal */
+.modal-header{
+    background-color: var(--green);
+}
+
+.modal-body button{
+    background-color: var(--green);
+    border: 1px solid var(--green);
+    color: white;
+}
+
+.modal-body button:hover {
+    background-color: black;
+}
+
+.modal-footer button:hover {
+    background-color: var(--green);
+    border: 1px solid var(--green);
+}
+
+/*--------------------------------------Subjects Available--------------------------------------------*/
+
+.subjects-available{
+    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 300%;
+}
+
+@media (min-width: 0px) and (max-width: 768px){
+    .subjects-available{
+        font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 250%;
+    }
+}
+
+#subjectcard{
+    border-bottom: : 1px var(--green) solid;
+}
+
+#cardbody{
+    background-color: var(--green); 
+    color:white;
+    max-height: 4em;
+}
+
+.list-group-item{
+    padding:1em 0em;
+    border: none;
+}
+
+
+.list-group-item:hover{
+    background-color: var(--green);
+    cursor: pointer;
+    color: white;
+}
+
+.card-link{
+    text-decoration: none;
+    color: black;
+}
+
+.card-link:hover{
+    color: black;
+    
+}
+
+/* -------------------------------------- Recent notes ----------------------------------------------*/
+#notesitem:hover{
+    background-color: white;
+    cursor: default;
+}
+
+#notesdesc:hover{
+    background-color: white;
+    cursor: default;
+}
+
+/*------------------------------------------- Floating Button -----------------------------------*/
+.action
+{
+    position:fixed;
+    bottom:30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background:var(--green);
+    border-radius:50%;
+    cursor:pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+         
+}
+.action span{
+    
+      postion:relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      color: white;
+      font-size: 2em;
+      transition: 0.3s ease-in-out;
+         
+}
+.action:active  span
+{
+    transform:rotate(135deg);
+    
+}
+
+/*This is the white part*/
+.action ul{
+    position:absolute;
+    bottom:55px;
+    right:5px;
+    background:var(--green);
+    min-width:150px;
+    padding:20px;
+    border-radius:10px;
+    opacity:0;
+    visibility:hidden;
+    transition:0.2s;
+    
+}
+.action.active ul 
+{
+    bottom:65px;
+    opacity: 1;
+    visibility: visible;
+    transition: 0.3s;
+    
+    
+}
+.action.active ul li
+{
+    list-style:none;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    padding:10px 0;
+    transition: 0.3s;
+    
+}
+.action ul li:hover{
+    font-weight:600;
+
+}
+.action ul li:not(:last-child)
+{
+    border-bottom:1px solid rgba(0,0,0,0.2);
+}
+
+.action ul li a{
+    text-decoration: none;
+        color:white;
+}
+
+/*--------------------------------------Numbers button--------------------------------------------*/
+.box{
+    background: var(--green);
+}
+#counter
+{
+    font-size: 50px;
+    color: white;
+}
+
+.text
+{
+    font-size: 20px;
+}
+
+.counter-up{
+  background-color: white;
+  min-height: 38vh;
+  padding: 0 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+}
+.counter-up::before{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+  
+}
+.counter-up .content{
+  z-index: 0;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+ 
+}
+.counter-up .content .box{
+  width: calc(25% - 30px);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 20px;
+}
+.content .box .icon{
+  font-size: 40px;
+  color: black;
+}
+.content .box .counter{
+  font-size: 50px;
+  font-weight: 500;
+  color: white;
+  font-family: sans-serif;
+}
+.content .box .text{
+  font-weight: 400;
+  color: white;
+}
+@media screen and (max-width: 1036px) {
+  .counter-up{
+    padding: 50px 50px 0 50px;
+  }
+  .counter-up .content .box{
+    width: calc(50% - 30px);
+    margin-bottom: 50px;
+  }
+}
+@media screen and (max-width: 580px) {
+  .counter-up .content .box{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .wrapper{
+    padding: 20px;
+  }
+  .counter-up{
+    padding: 30px 20px 0 20px;
+  }
+}
+
+
+/*-------------------------------------------Kevin Floating Button -----------------------------------*/
+/*
+.fab-container{
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.fab-icon-holder{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: var(--green);
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+.fab-icon-holder:hover{
+    opacity: 0.8;
+}
+
+.fab-icon-holder i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 25px;
+    color: black;
+}
+
+.fab{
+    width: 60px;
+    height: 60px;
+    background: grey;
+}
+
+.fab-options{
+    list-style-type: none;
+    margin: 0;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+
+
+}
+
+.fab:hover + .fab-options, .fab-options:hover{
+    opacity: 1;
+    transform: scale(1);
+}
+
+.fab-options li{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.fab-label{
+    padding: 2px 5px;
+    align-self: center;
+    user-select: none;
+    white-space: nowrap;
+    border-radius: 3px;
+    font-size: 16px;
+    background: brown;
+    color: white;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);
+    margin-right: 10px;
+    
+}*/
+
+
+
+/*----------------------------------------------------------------------------------*/
+
+/* .navbar-brand{
+    padding-left: 5.2em;
+  }
+
+  @media (max-width:990px){
+    .navbar-brand{
+      padding-left: 0em;
+    }
+
+  } */
+
+/* RECENT NOTES BUTTON */
+/* #recentnotesbtn{
+  border:2px solid black;
+  
+}
+
+#recentnotesbtn:hover{
+  background-color:transparent;
+  border:2px solid black;
+  color:black;
+} */

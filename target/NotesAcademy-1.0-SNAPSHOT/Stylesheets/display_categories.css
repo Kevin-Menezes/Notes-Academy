@@ -1,0 +1,137 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+/* Declaring Variables */
+:root {
+    --green: #6B9B8A;
+    --offwhite: #F8F8F6;
+    --brightgreen: #C9FCE9;
+    --darkgreen:#364B44;
+    --darkgrey: #6C6C6C;
+}
+
+/*---------------------------------------Navbar-------------------------------------------*/
+
+.notes-academy{
+    font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+}
+
+/* Navbar color */
+.navbar-dark {
+    background-color: var(--green);
+}
+
+nav a {
+    color: white;
+}
+
+/* Navbar Dropdown*/
+.dropdown-menu {
+    /*  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.2);*/
+    border: none;
+    border-radius: 5px;
+    background-color: var(--green);
+}
+
+/* Navbar menu dropdown responsive text */
+@media (max-width:480px) {
+    .dropdown-menu {
+        width: 99%;
+    }
+
+    .dropdown-menu>li>a {
+        white-space: normal;
+    }
+}
+
+/* Dropdown item hover */
+.dropdown-item:hover {
+    background-color: white;
+}
+
+.nav-item:last-child {
+    padding-right: 5em;
+}
+
+.nav-item {
+    padding: 0em 0.5em;
+}
+
+/*Bottom padding for the alert*/
+.alert{
+    margin-bottom: 0px;
+}
+
+/*-----------------------------------Navbar Modal-----------------------------------------------*/
+
+/* Modal */
+.modal-header{
+    background-color: var(--green);
+}
+
+.modal-body button{
+    background-color: var(--green);
+    border: 1px solid var(--green);
+    color: white;
+}
+
+.modal-body button:hover {
+    background-color: black;
+}
+
+.modal-footer button:hover {
+    background-color: var(--green);
+    border: 1px solid var(--green);
+}
+
+/*-------------------------------------------------------------------------- DISPLAY CATEGORIES BODY-------------------------------------------------------------------- */
+
+.table{
+    margin-top: 2em;
+}
+
+#tabletitle{
+    margin-top: 3em;
+}
+
+#addcategorybtn{
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    width: 200px;
+    display: inline-block;
+    transition: all 0.5s;
+  }
+
+/* WORDS ON BUTTON */
+#addcategorybtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+/* THE TWO ARROWS ON RIGHT */
+#addcategorybtn span:after {
+    content: '+';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+/* HOVER OVER BUTTON */
+#addcategorybtn:hover span {
+    padding-right: 15px;
+}
+
+/* AFTER HOVER OVER BUTTON */
+#addcategorybtn:hover span:after {
+    opacity: 1;
+    right: 0;
+}

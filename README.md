@@ -6,6 +6,7 @@ An interactive website that manages and provides study notes which can be quickl
 <hr>
 
 # 📝Project Documentation
+This documentation contains the detailed description of analysis, design, coding and testing done on this project
 https://docs.google.com/document/d/1qZsYYe6iegc2V68V_-3O-IAEdrLW7DgbKgfug0lRk1g/edit?usp=sharing
 
 <br/>
@@ -52,9 +53,23 @@ https://docs.google.com/document/d/1qZsYYe6iegc2V68V_-3O-IAEdrLW7DgbKgfug0lRk1g/
 #
 
 ### Q. What features will be implemented in future?
-Ans. 
+- Along with note, sections will be made to upload project github links and pdfs.
+- More sections will be made for users to upload test papers, youtube lecture links and ebooks.
+- Comments will be implemented for users to communicate with each other.
+- An inbuilt text editor will be made where users can take down notes during their lectures on their phones and then can immediately upload on the website.
+- New notification system , to alert the user when his/her notes are accepted.
+- A Recommendation system will be made where users can get easy access to their favourite type of notes.
 
 <br/>
 <hr>
 
 # ❓How to install and run this project
+- You'll need Netbeans 8.2, JDK 8, Maven, Glassfish 4.1.1 and Xampp downloaded on your PC/Laptop to run this project.
+- Download the project files on your PC/Laptop.
+- Open the project in Netbeans 8.2.
+- Open Xampp and start Apache & MySQL. Then click on Admin next to mysql.
+- Download and import the database file in phpmyadmin (database file is provided in the files of the project).
+- Build and run the project in Netbeans.
+- Now you can follow the video and navigate through the project.
+- Admin - username = admin@gmail.com | password = admin13579.
+

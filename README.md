@@ -21,14 +21,35 @@ https://docs.google.com/document/d/1qZsYYe6iegc2V68V_-3O-IAEdrLW7DgbKgfug0lRk1g/
 <hr>
 
 # 📄Project Description
-### Q. What does this website do?
-Ans. 
-
-### Q. What technologies are used to build this website?
-Ans. 
+### Q. What is the purpose of this website?
+- This website is a free and open interactive platform to manage college notes uploaded by students, which can then come in use of other students who are in need of  notes to study for their exams. 
+- Notes are categorized in proper sections, which makes them easily accessible to users.
+#
 
 ### Q. How will users benefit from this website?
-Ans. 
+- Users can upload and gain quick access to study notes of various courses and subjects anytime, all in a single place.
+- No more wasting time in searching for college related notes randomly everywhere.
+- Everything can be quickly accessed here.
+#
+
+### Q. What technologies are used to build this website?
+- Frontend - Html, Css, JavaScript, Bootstrap
+- Backend - JSP, MySQL
+#
+
+### Q. What features does this website have?
+- Dynamic website - Everything is linked to the database
+- Responsive - This website can be used on laptops, tabs as well as on mobile phones
+- Validation - Every form is validated properly
+- Data hiding - Notes will first go to the admin to be checked and then only they'll be uploaded on the main website
+- Data classification - Notes are given certain tags based on particular categories. This enhances the UX of the website
+- Filter system - Notes can be filtered according to user's needs
+- Rank system - Reward based system that increments after completing certain criterias
+- Search bar - Quickly searches particular notes
+- Payment system - Razorpay API used for demo payments
+- Admin section - Admin can control the workflow of the entire website
+- Create PDF - Online PDF maker from images
+#
 
 ### Q. What features will be implemented in future?
 Ans. 

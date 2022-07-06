@@ -76,13 +76,13 @@ https://docs.google.com/document/d/1qZsYYe6iegc2V68V_-3O-IAEdrLW7DgbKgfug0lRk1g/
 <br/>
 <hr>
 
-# License
+# ⚖License
 Distributed under the Apache 2.0 License. See `LICENSE.md` for more information.
 
 <br/>
 <hr>
 
-# Acknowledgments
+# ✔Acknowledgments
 * [Choose an Open Source License](https://choosealicense.com)
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 * [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)

@@ -35,7 +35,7 @@ https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=shari
 
 ### Q. What technologies are used to build this website?
 - Frontend - Html, Css, JavaScript, Bootstrap
-- Backend - JSP, MySQL
+- Backend - Java, JSP, MySQL
 #
 
 ### Q. What features does this website have?

@@ -71,7 +71,7 @@ https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=shari
 - Download and import the database file in phpmyadmin (database file is provided in the files of the project).
 - Build and run the project in Netbeans.
 - Now you can follow the video and navigate through the project.
-- Admin - username = admin@gmail.com | password = admin13579.
+- Admin - username = admin@gmailcom | password = admin13579.
 
 <br/>
 <hr>
@@ -82,12 +82,12 @@ Distributed under the Apache 2.0 License. See `LICENSE.md` for more information.
 <br/>
 <hr>
 
-# ✔Acknowledgments
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+# ✔References
+* [Youtube](https://www.youtube.com/)
+* [Google](https://www.google.com/)
+* [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+* [W3Schools](https://www.w3schools.com/)
+* [Javatpoint](https://www.javatpoint.com/jsp-tutorial)
+* [GeeksForGeeks](https://www.geeksforgeeks.org/introduction-to-jsp/)
+* [Tutorialspoint](https://www.tutorialspoint.com/jsp/index.htm)
+* [Razorpay](https://razorpay.com/)

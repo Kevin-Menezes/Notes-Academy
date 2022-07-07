@@ -68,7 +68,7 @@ https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=shari
 - Download the project files on your PC/Laptop.
 - Open the project in Netbeans 8.2.
 - Open Xampp and start Apache & MySQL. Then click on Admin next to mysql.
-- Download and import the database file in phpmyadmin (database file is provided in the files of the project).
+- Download and import the database file in phpmyadmin ( database file is provided in the files of the project : https://github.com/Kevin-Menezes/Notes-Academy/blob/main/notesacademydb.sql )
 - Build and run the project in Netbeans.
 - Now you can follow the video and navigate through the project.
 - Admin - username = admin@gmailcom | password = admin13579.

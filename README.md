@@ -6,14 +6,14 @@ An interactive website that manages and provides study notes which can be quickl
 <hr>
 
 # 📝Project Documentation
-This documentation contains the detailed description of analysis, design, coding and testing done on this project
+This documentation contains the detailed description of analysis, design, coding and testing done on this project.
 https://docs.google.com/document/d/1qZsYYe6iegc2V68V_-3O-IAEdrLW7DgbKgfug0lRk1g/edit?usp=sharing
 
 <br/>
 <hr>
 
 # ▶Website video
-This video will show you the working of the website and will guide you on how to use it
+This video will show you the working of the website and will guide you on how to use it.
 https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=sharing
 
 <img alt="Index.jsp" src="https://github.com/Kevin-Menezes/Notes-Academy/blob/main/Index.png">
@@ -39,17 +39,17 @@ https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=shari
 #
 
 ### Q. What features does this website have?
-- Dynamic website - Everything is linked to the database
-- Responsive - This website can be used on laptops, tabs as well as on mobile phones
-- Validation - Every form is validated properly
-- Data hiding - Notes will first go to the admin to be checked and then only they'll be uploaded on the main website
-- Data classification - Notes are given certain tags based on particular categories. This enhances the UX of the website
-- Filter system - Notes can be filtered according to user's needs
-- Rank system - Reward based system that increments after completing certain criterias
-- Search bar - Quickly searches particular notes
-- Payment system - Razorpay API used for demo payments
-- Admin section - Admin can control the workflow of the entire website
-- Create PDF - Online PDF maker from images
+- Dynamic website - Everything is linked to the database.
+- Responsive - This website can be used on laptops, tabs as well as on mobile phones.
+- Validation - Every form is validated properly.
+- Data hiding - Notes will first go to the admin to be checked and then only they'll be uploaded on the main website.
+- Data classification - Notes are given certain tags based on particular categories. This enhances the UX of the website.
+- Filter system - Notes can be filtered according to user's needs.
+- Rank system - Reward based system that increments after completing certain criterias.
+- Search bar - Quickly searches particular notes.
+- Payment system - Razorpay API used for demo payments.
+- Admin section - Admin can control the workflow of the entire website.
+- Create PDF - Online PDF maker from images.
 #
 
 ### Q. What features will be implemented in future?

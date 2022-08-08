@@ -13,15 +13,14 @@
     HttpSession s = request.getSession();
     UserDetails us = (UserDetails) session.getAttribute("admindetails");
 
-    if (us == null) {
-        Message msg = new Message("Please Login First!", "error", "alert-danger");
-        s.setAttribute("message", msg);
-        response.sendRedirect("index.jsp");
-    } else if (!"admin@gmail.com".equals(us.getUserEmail()) && !"admin13579".equals(us.getUserPassword())) {
-        Message msg = new Message("User not allowed in Admin section!", "error", "alert-danger");
-        s.setAttribute("message", msg);
-        response.sendRedirect("home.jsp");
-    } else {
+    if(us==null)
+        {
+            Message msg = new Message("User not allowed in Admin section! Please Login First!", "error", "alert-danger");
+            s.setAttribute("message", msg);
+           response.sendRedirect("index.jsp");
+        }
+        else
+        {
 
 %>
 <!DOCTYPE html>

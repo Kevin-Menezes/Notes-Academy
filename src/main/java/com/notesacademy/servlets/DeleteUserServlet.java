@@ -24,15 +24,26 @@ public class DeleteUserServlet extends HttpServlet
     {
         HttpSession session = request.getSession(); // WE CREATE A SESSION 
         int userId = Integer.parseInt(request.getParameter("id"));
+        String role = request.getParameter("role");
         
         UserDAOImpl dao = new UserDAOImpl(DBConnection.getConnection()); // WE CONNECT THE DATABASE BY CALLING THE DAOImpl FUNCTION
         boolean f = dao.deleteUser(userId);
         
          if(f)
             {
-                Message msg = new Message("User deleted successfully!", "success", "alert-success");
-                session.setAttribute("message", msg);  
-                response.sendRedirect("display_users.jsp"); 
+                if(role.equals("User"))
+                {
+                    Message msg = new Message("User deleted successfully!", "success", "alert-success");
+                    session.setAttribute("message", msg);  
+                    response.sendRedirect("display_users.jsp");      
+                }
+                else
+                {
+                    Message msg = new Message("Admin deleted successfully!", "success", "alert-success");
+                    session.setAttribute("message", msg);  
+                    response.sendRedirect("display_admins.jsp");     
+                }
+                
             }
             else
             {

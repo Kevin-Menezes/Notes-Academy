@@ -116,7 +116,7 @@
 <!-- --------------------------------------------------------------------------MODALS------------------------------------------------------------------------------------------------------------------------ -->
 
 <!-------------------------------------------- Login Modal -------------------------------------------------->
-<div class="modal fade" id="loginModal" aria-hidden="true" aria-labelledby="exampleModalLabel" tabindex="-1">
+<!--<div class="modal fade" id="loginModal" aria-hidden="true" aria-labelledby="exampleModalLabel" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -129,13 +129,13 @@
           
           <form action="LoginServlet" method="post">
           <div class="form-group row align-items-center">
-              <!-- EMAIL -->
+               EMAIL 
               <div class="form-group col-sm-6">                     
                   <input type="email" class="form-control form-control-sm" id="loginEmail" placeholder="Enter email" required="required" name="email">
               </div>
-              <div class="col-sm"></div> <!--THIS IS FOR THE EXTRA SPACE-->
+              <div class="col-sm"></div> THIS IS FOR THE EXTRA SPACE
 
-              <!-- PASSWORD -->
+               PASSWORD 
               <div class="form-group col-sm-6 mt-3">                     
                   <input type="password" class="form-control form-control-sm" id="loginPassword" placeholder="Enter password" aria-describedby="passwordHelpInline" required="required" minlength="8" maxlength="20" name="password">
               </div>
@@ -145,7 +145,7 @@
                 </span>
               </div>
 
-              <!-- BUTTON -->
+               BUTTON 
               <div class="form-group row">
                 <div class="mt-3  col-md" data-bs-toggle="buttons">
                     <button type="submit" class="btn btn-primary col-5 col-sm-3 ">Login</button>
@@ -167,12 +167,12 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 <!--------------------------------------------------------------------------------------------------------- -->
 
 <!------------------------------------------- Sign Up Modal ------------------------------------------------>
-<div class="modal fade" id="signupModal" aria-hidden="true" aria-labelledby="exampleModalLabel" tabindex="-1">
+<!--<div class="modal fade" id="signupModal" aria-hidden="true" aria-labelledby="exampleModalLabel" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -186,13 +186,13 @@
               
         <form action="SignUpServlet" onsubmit ="return verifyPassword();" method="post" >
           <div class="form-group row align-items-center">
-              <!-- USERNAME -->
+               USERNAME 
               <div class="form-group col-sm-6">                     
                   <input type="text" class="form-control form-control-sm" id="signupUsername" placeholder="Enter username" required="required" name="uname" pattern="[A-Za-z\s]{3,30}" oninvalid="this.setCustomValidity('Enter 3 to 30 characters. No numbers & special characters allowed!')" oninput="this.setCustomValidity('')">
               </div>
-              <div class="col-sm"></div> <!--THIS IS FOR THE EXTRA SPACE-->
+              <div class="col-sm"></div> THIS IS FOR THE EXTRA SPACE
 
-              <!-- PASSWORD -->
+               PASSWORD 
               <div class="form-group col-sm-6 mt-3">                     
                   <input type="password" class="form-control form-control-sm" id="signupPassword" placeholder="Enter password" aria-describedby="passwordHelpInline" minlength="8" maxlength="20" required="required"  name="upass">
               </div>
@@ -200,13 +200,13 @@
                 <span id="passwordInline"  class="form-text">Must be 8 to 20 characters long!</span>
               </div>
 
-              <!-- EMAIL -->
+               EMAIL 
               <div class="form-group col-sm-6 mt-3">                     
                   <input type="email" class="form-control form-control-sm" id="signupEmail" placeholder="Enter email" required="required" name="uemail">
               </div>
-              <div class="col-sm"></div> <!--THIS IS FOR THE EXTRA SPACE-->
+              <div class="col-sm"></div> THIS IS FOR THE EXTRA SPACE
               
-              <!-- PROFESSION -->
+               PROFESSION 
               <div class="form-group col-sm-6 mt-3">
                   <input class="form-control form-control-sm" list="datalistOptions" id="exampleDataList" placeholder="Enter your profession" aria-describedby="passwordHelpInline" name="uprof" pattern="[A-Za-z\s]{3,20}" oninvalid="this.setCustomValidity('Enter 3 to 20 characters. No numbers & special characters allowed!')" oninput="this.setCustomValidity('')">
                 <datalist id="datalistOptions">
@@ -222,7 +222,7 @@
                 </span>
               </div>
 
-               <!-- COLLEGENAME -->
+                COLLEGENAME 
               <div class="form-group col-sm-6 mt-3">                     
                   <input type="text" class="form-control form-control-sm" id="signupClg" placeholder="Enter college/institute name" name="uclg" pattern="[A-Za-z\s]{3,30}" oninvalid="this.setCustomValidity('Enter 3 to 30 characters. No numbers & special characters allowed!')" oninput="this.setCustomValidity('')">
               </div>
@@ -232,7 +232,7 @@
                 </span>
               </div>
               
-              <!-- BUTTON -->
+               BUTTON 
               <div class="form-group row">
                 <div class="mt-3  col-md" data-bs-toggle="buttons">
                     <button type="submit" class="btn btn-primary col-5 col-sm-3 ">Sign Up</button>
@@ -254,10 +254,10 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 
-<script>
+<!--<script>
 function verifyPassword()
                     {
                         var pw = document.getElementById("signupPassword").value;
@@ -281,5 +281,5 @@ function verifyPassword()
                         }
                     };
                     
-    </script>
+    </script>-->
 

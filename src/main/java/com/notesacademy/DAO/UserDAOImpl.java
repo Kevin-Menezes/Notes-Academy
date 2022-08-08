@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO
         boolean f = false;
         
         try{
-            String sql = "insert into user(userName,userPassword,userEmail,userProfession,userCollege,Role) values(?,?,?,?,?,?)"; // INSERTING INTO THE DATABASE
+            String sql = "insert into user(userName,userPassword,userEmail,userProfession,userCollege,Role) values(?,aes_encrypt(?,'txt1234'),?,?,?,?)"; // INSERTING INTO THE DATABASE
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setString(1, us.getUserName()); // TAKING VALUES FROM THE USER'S GETTER AND PUTTING IN THE DATABASE
@@ -55,9 +55,11 @@ public class UserDAOImpl implements UserDAO
     {
         UserDetails us = null;
         
+        // cast(aes_decrypt(userPassword,'txt1234') as char(100))
+        
         try
         {
-            String sql = "select * from user where userEmail=? and userPassword=?";  // CHECKING IF THE USER HAS REGISTERED
+            String sql = "select userId, userName, aes_decrypt(userPassword,'txt1234'), userEmail, userProfession, userCollege, userLikeCount, userDownloadCount, userViewCount, userRank, Role from user where userEmail=? and userPassword=aes_encrypt(?,'txt1234')";  // CHECKING IF THE USER HAS REGISTERED
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setString(1,email); // CHECKING IF THE DETAILS IN THE DATABASE MATCH WITH THE DATA THAT IS ENTERED IN THE LOGIN FORM
@@ -225,7 +227,7 @@ public class UserDAOImpl implements UserDAO
         
         try 
         {
-            String sql = "SELECT * FROM user WHERE userId = ? ";
+            String sql = "SELECT userId, userName, aes_decrypt(userPassword,'txt1234'), userEmail, userProfession, userCollege, userLikeCount, userDownloadCount, userViewCount, userRank, Role FROM user WHERE userId = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             
@@ -265,7 +267,7 @@ public class UserDAOImpl implements UserDAO
         
         try 
         {
-            String sql = "UPDATE user SET userName = ? , userPassword = ? , userEmail = ? , userProfession = ? , userCollege = ? WHERE userId = ?";
+            String sql = "UPDATE user SET userName = ? , userPassword = aes_encrypt(?,'txt1234') , userEmail = ? , userProfession = ? , userCollege = ? WHERE userId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, us.getUserName());
             ps.setString(2, us.getUserPassword());

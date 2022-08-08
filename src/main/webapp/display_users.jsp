@@ -16,15 +16,9 @@
         
         if(us==null)
         {
-            Message msg = new Message("Please Login First!", "error", "alert-danger");
+            Message msg = new Message("User not allowed in Admin section! Please Login First!", "error", "alert-danger");
             s.setAttribute("message", msg);
            response.sendRedirect("index.jsp");
-        }
-        else if(!"admin@gmail.com".equals(us.getUserEmail()) && !"admin13579".equals(us.getUserPassword()))
-        {
-            Message msg = new Message("User not allowed in Admin section!", "error", "alert-danger");
-            s.setAttribute("message", msg);
-            response.sendRedirect("home.jsp");
         }
         else
         {
@@ -82,7 +76,7 @@
                             <td>
                                 <!-- BUTTON -->    
                                     <a href="edit_user.jsp?id=<%=b.getUserId() %>"  class="btn btn-success col-12 col-lg-5">Edit</a>                        
-                                    <a href="DeleteUserServlet?id=<%=b.getUserId() %>" class="btn btn-dark col-12 col-lg-5 ms-0 ms-lg-2 mt-1 mt-lg-0" style="background-color: black;">Delete</a>                                   
+                                    <a href="DeleteUserServlet?id=<%=b.getUserId() %>&role=<%=b.getRole() %>" class="btn btn-dark col-12 col-lg-5 ms-0 ms-lg-2 mt-1 mt-lg-0" style="background-color: black;">Delete</a>                                   
                             </td>     
                           </tr> 
                           <%    }

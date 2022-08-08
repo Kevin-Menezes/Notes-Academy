@@ -18,6 +18,7 @@ public class LogoutServlet extends HttpServlet {
     {
         HttpSession s = request.getSession();
         s.removeAttribute("userdetails");
+        s.removeAttribute("admindetails");
         
         Message msg = new Message("Logout successful!", "success", "alert-success");
         s.setAttribute("message", msg);

@@ -28,19 +28,17 @@ public class LoginServlet extends HttpServlet {
             String email = req.getParameter("email"); // THIS WE TAKE FROM THE LOGIN FORM
             String password = req.getParameter("password");
             
-            if("admin@gmail.com".equals(email) && "admin13579".equals(password)) // FOR ADMIN SIDE LOGIN
-            {
-                
-                UserDetails us = dao.userLogin(email, password); // This acts like admin login also
+            UserDetails us = dao.userLogin(email, password);  // WE CALL THE LOGIN FUNCTION WHICH IS IN THE DAO CLASS USING THE dao OBJECT CREATED ABOVE 
+            
+            if(us!=null && us.getRole().equals("Admin")) // FOR ADMIN SIDE LOGIN
+            { 
                 session.setAttribute("admindetails", us);
                 resp.sendRedirect("admin_home.jsp"); // WE REDIRECT IT TO THE HOME PAGE OF THE ADMIN
-                
             }
             else
             {
-                UserDetails us = dao.userLogin(email, password); // WE CALL THE LOGIN FUNCTION WHICH IS IN THE DAO CLASS USING THE dao OBJECT CREATED ABOVE 
                 
-                if(us!=null) // IF THAT FUNCTION RETURNS ALL USERS DETAILS
+                if(us!=null && us.getRole().equals("User")) // IF THAT FUNCTION RETURNS ALL USERS DETAILS
                 {
                     Message msg = new Message("Login successful!", "success", "alert-success");
                     session.setAttribute("message", msg); 

@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.notesacademy.servlets;
 
 import com.notesacademy.DAO.UserDAOImpl;
@@ -14,12 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class SignUpServlet extends HttpServlet 
-{
-   
+public class AddAdminServlet extends HttpServlet {
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException 
-    {
+            throws ServletException, IOException {
+        
         HttpSession session = req.getSession(); // SESSION
         
          try
@@ -37,7 +41,7 @@ public class SignUpServlet extends HttpServlet
             us.setUserEmail(email);
             us.setUserProfession(profession);
             us.setUserCollege(college);
-            us.setRole("User");
+            us.setRole("Admin");
             
             
             UserDAOImpl dao = new UserDAOImpl(DBConnection.getConnection()); // GETTING THE DB CONNECTION OBJECT FROM getConnection() FUNCTION AND THEN PUTTING IT IN THE UserDAOImpl constructor
@@ -46,17 +50,16 @@ public class SignUpServlet extends HttpServlet
 
             if(f) // IF IT IS TRUE
             {
-                Message msg = new Message("Sign up successful! Kindly login now!", "success", "alert-success");
+                Message msg = new Message("New Admin Added!", "success", "alert-success");
                 session.setAttribute("message", msg); 
-                System.out.println("Signup successful");
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect("display_admins.jsp");
             }
             else
             {
                 Message msg = new Message("Error! Kindly retry with a different username or email!", "error", "alert-danger");
                 session.setAttribute("message", msg);
                 System.out.println("Error - Retry with different username");
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect("display_admins.jsp");
             }
             
         }
@@ -65,10 +68,13 @@ public class SignUpServlet extends HttpServlet
             Message msg = new Message("Something Went Wrong! Kindly retry with a different username!", "error", "alert-danger");
             session.setAttribute("message", msg);
             System.out.println("Something Went Wrong");
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("display_admins.jsp");
             e.printStackTrace();
         }
-           
+        
+
     }
+
     
+
 }

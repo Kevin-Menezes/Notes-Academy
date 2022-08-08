@@ -33,6 +33,7 @@ public class EditUserServlet extends HttpServlet
             String userEmail = request.getParameter("uemail");
             String userProfession = request.getParameter("uprof");
             String userCollege = request.getParameter("uclg");
+            String role = request.getParameter("role");
             
             int userId = Integer.parseInt(request.getParameter("uid"));
 
@@ -49,15 +50,25 @@ public class EditUserServlet extends HttpServlet
             
             if(f)
             {
-                Message msg = new Message("User edited successfully!", "success", "alert-success");
-                session.setAttribute("message", msg);  
-                response.sendRedirect("display_users.jsp"); // DIRECT IT TO THE USERS HOMEPAGE
+                if(role.equals("Admin"))
+                {
+                    Message msg = new Message("Admin edited successfully!", "success", "alert-success");
+                    session.setAttribute("message", msg);  
+                    response.sendRedirect("display_admins.jsp"); // DIRECT IT TO THE ADMINS HOMEPAGE      
+                }
+                else
+                {
+                    Message msg = new Message("User edited successfully!", "success", "alert-success");
+                    session.setAttribute("message", msg);  
+                    response.sendRedirect("display_users.jsp"); // DIRECT IT TO THE ADMINS HOMEPAGE      
+                }
+                
             }
             else
             {
                 Message msg = new Message("Error in updation! Kindly retry!", "error", "alert-danger");
                 session.setAttribute("message", msg); 
-                response.sendRedirect("display_users.jsp"); 
+                response.sendRedirect("display_admins.jsp"); 
             }
         } 
         catch (Exception e) 

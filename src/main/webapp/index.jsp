@@ -78,7 +78,7 @@
 
         <!-- Subjects Available start -->
         <div class="container">
-            <div class="row text-center">
+            <div class="row text-center"> 
                 <h2 class="mb-2 mt-5 subjects-available" >Subjects Available</h2>
                             
                 <div class="cards"> 

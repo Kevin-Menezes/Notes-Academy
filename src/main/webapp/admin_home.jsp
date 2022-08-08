@@ -18,15 +18,9 @@
         
         if(us==null)
         {
-            Message msg = new Message("Please Login First!", "error", "alert-danger");
+            Message msg = new Message("User not allowed in Admin section! Please Login First!", "error", "alert-danger");
             s.setAttribute("message", msg);
            response.sendRedirect("index.jsp");
-        }
-        else if(!"admin@gmail.com".equals(us.getUserEmail()) && !"admin13579".equals(us.getUserPassword()))
-        {
-            Message msg = new Message("User not allowed in Admin section!", "error", "alert-danger");
-            s.setAttribute("message", msg);
-            response.sendRedirect("home.jsp");
         }
         else
         {
@@ -172,11 +166,26 @@
                         <div class="card-body text-center">
                             <h1><%= usercount %></h1>
                             <h4 class="card-title ">USERS</h4>
-                            <p class="card-text">Display - Remove Users</p>
+                            <p class="card-text">Edit - Remove Users</p>
                             <a href="display_users.jsp" class="btn btn-dark">Make changes</a>
                         </div>
                     </div>
                 </div>
+                            
+                 <!-- ADMINS -->
+                 <% 
+                      int admincount = daouser.getAdminsCount();
+                %>
+                <div class="col-lg-3 mt-4 mx-auto">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h1><%= admincount %></h1>
+                            <h4 class="card-title ">ADMINS</h4>
+                            <p class="card-text">Add - Edit - Remove Admins</p>
+                            <a href="display_admins.jsp" class="btn btn-dark">Make changes</a>
+                        </div>
+                    </div>
+                </div>           
 
             </div>
                             

@@ -18,7 +18,11 @@ public interface UserDAO
     
     public int getUsersCount(); // Total number of users
     
+    public int getAdminsCount(); // Total number of users
+    
     List<UserDetails> getUsers(); // Gets the details of all the users
+    
+    List<UserDetails> getAdmins(); // Gets the details of all the admins
     
     public UserDetails getUserById(int id); // Gets a particular users details from userid  
     

@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO
         boolean f = false;
         
         try{
-            String sql = "insert into user(userName,userPassword,userEmail,userProfession,userCollege) values(?,?,?,?,?)"; // INSERTING INTO THE DATABASE
+            String sql = "insert into user(userName,userPassword,userEmail,userProfession,userCollege,Role) values(?,aes_encrypt(?,'txt1234'),?,?,?,?)"; // INSERTING INTO THE DATABASE
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setString(1, us.getUserName()); // TAKING VALUES FROM THE USER'S GETTER AND PUTTING IN THE DATABASE
@@ -33,6 +33,7 @@ public class UserDAOImpl implements UserDAO
             ps.setString(3, us.getUserEmail());
             ps.setString(4, us.getUserProfession());
             ps.setString(5, us.getUserCollege());
+            ps.setString(6, us.getRole());
             
             int rs = ps.executeUpdate();
             
@@ -54,9 +55,11 @@ public class UserDAOImpl implements UserDAO
     {
         UserDetails us = null;
         
+        // cast(aes_decrypt(userPassword,'txt1234') as char(100))
+        
         try
         {
-            String sql = "select * from user where userEmail=? and userPassword=?";  // CHECKING IF THE USER HAS REGISTERED
+            String sql = "select userId, userName, aes_decrypt(userPassword,'txt1234'), userEmail, userProfession, userCollege, userLikeCount, userDownloadCount, userViewCount, userRank, Role from user where userEmail=? and userPassword=aes_encrypt(?,'txt1234')";  // CHECKING IF THE USER HAS REGISTERED
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setString(1,email); // CHECKING IF THE DETAILS IN THE DATABASE MATCH WITH THE DATA THAT IS ENTERED IN THE LOGIN FORM
@@ -76,6 +79,7 @@ public class UserDAOImpl implements UserDAO
                 us.setUserDownloadCount(rs.getInt(8));
                 us.setUserViewCount(rs.getInt(9));
                 us.setUserRank(rs.getInt(10));
+                us.setRole(rs.getString(11));
             }
         
         }
@@ -96,7 +100,7 @@ public class UserDAOImpl implements UserDAO
         
         try 
         {
-            String sql = "SELECT COUNT(userName) FROM user";
+            String sql = "SELECT COUNT(userName) FROM user WHERE Role='User'";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             rs.next();
@@ -112,6 +116,30 @@ public class UserDAOImpl implements UserDAO
         
         
     }
+    
+    // ------------------------------------------------ Count of Admins --------------------------------------
+    
+    @Override
+    public int getAdminsCount() 
+    {
+        int count = 0;
+        
+        try 
+        {
+            String sql = "SELECT COUNT(userName) FROM user WHERE Role='Admin'";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+        } 
+        
+        catch (Exception e) 
+        {
+            System.out.println("There is error in UserDAOImpl - getAdminsCount : "+e);
+        }
+        
+        return count;
+    }
 
     // --------------------------------------------------------- Gets the details of all the users -----------------------------------------------------------------
     
@@ -124,10 +152,10 @@ public class UserDAOImpl implements UserDAO
          try 
         {
             
-            String sql = "SELECT * FROM user";
-            PreparedStatement ps_getcategories = con.prepareStatement(sql);
+            String sql = "SELECT * FROM user WHERE Role='User'";
+            PreparedStatement ps_getusers = con.prepareStatement(sql);
             
-            ResultSet rs = ps_getcategories.executeQuery();
+            ResultSet rs = ps_getusers.executeQuery();
 
             while (rs.next()) 
             {
@@ -138,6 +166,7 @@ public class UserDAOImpl implements UserDAO
                 us.setUserEmail(rs.getString(4));
                 us.setUserProfession(rs.getString(5));
                 us.setUserCollege(rs.getString(6));
+                us.setRole(rs.getString(11));
                 list.add(us);           
             }
 
@@ -151,6 +180,44 @@ public class UserDAOImpl implements UserDAO
 
     }
     
+    // --------------------------------------------------------- Gets the details of all the admins -----------------------------------------------------------------
+    
+    @Override
+    public List<UserDetails> getAdmins() 
+    {
+        List<UserDetails> list = new ArrayList<UserDetails>();
+        UserDetails us = null;
+        
+        try 
+        {
+            String sql = "SELECT * FROM user WHERE Role='Admin'";
+            PreparedStatement ps_getadmins = con.prepareStatement(sql);
+            
+            ResultSet rs = ps_getadmins.executeQuery();
+
+            while (rs.next()) 
+            {
+                us = new UserDetails();
+                us.setUserId(rs.getInt(1));
+                us.setUserName(rs.getString(2));
+                us.setUserPassword(rs.getString(3));
+                us.setUserEmail(rs.getString(4));
+                us.setUserProfession(rs.getString(5));
+                us.setUserCollege(rs.getString(6));
+                us.setRole(rs.getString(11));
+                list.add(us);           
+            }
+
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("There is error in UserDAOImpl - getAdmins : "+e);
+        }
+
+        return list;
+        
+    }
+    
     // ---------------------------------------------------- Gets a particular users details from userid  ----------------------------------------------------
 
     @Override
@@ -160,7 +227,7 @@ public class UserDAOImpl implements UserDAO
         
         try 
         {
-            String sql = "SELECT * FROM user WHERE userId = ? ";
+            String sql = "SELECT userId, userName, aes_decrypt(userPassword,'txt1234'), userEmail, userProfession, userCollege, userLikeCount, userDownloadCount, userViewCount, userRank, Role FROM user WHERE userId = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             
@@ -178,6 +245,7 @@ public class UserDAOImpl implements UserDAO
                 us.setUserDownloadCount(rs.getInt(8));
                 us.setUserViewCount(rs.getInt(9));
                 us.setUserRank(rs.getInt(10));
+                us.setRole(rs.getString(11));
                 
             }
         } 
@@ -199,7 +267,7 @@ public class UserDAOImpl implements UserDAO
         
         try 
         {
-            String sql = "UPDATE user SET userName = ? , userPassword = ? , userEmail = ? , userProfession = ? , userCollege = ? WHERE userId = ?";
+            String sql = "UPDATE user SET userName = ? , userPassword = aes_encrypt(?,'txt1234') , userEmail = ? , userProfession = ? , userCollege = ? WHERE userId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, us.getUserName());
             ps.setString(2, us.getUserPassword());

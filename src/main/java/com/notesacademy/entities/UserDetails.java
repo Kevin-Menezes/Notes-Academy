@@ -14,6 +14,7 @@ public class UserDetails
     private int userDownloadCount;
     private int userViewCount;
     private int userRank;
+    private String Role;
 
     // Getter Setter
     public int getUserId() {
@@ -95,11 +96,15 @@ public class UserDetails
     public void setUserRank(int userRank) {
         this.userRank = userRank;
     }
-    
-    
-    
-    
-    
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String Role) {
+        this.Role = Role;
+    }
+     
     //Constructors
     public UserDetails() {
     }
@@ -115,7 +120,7 @@ public class UserDetails
     }
 
       // All
-    public UserDetails(int userId, String userName, String userPassword, String userEmail, String userProfession, String userCollege, int userLikeCount, int userDownloadCount, int userViewCount, int userRank) {
+    public UserDetails(int userId, String userName, String userPassword, String userEmail, String userProfession, String userCollege, int userLikeCount, int userDownloadCount, int userViewCount, int userRank,String Role) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -126,6 +131,7 @@ public class UserDetails
         this.userDownloadCount = userDownloadCount;
         this.userViewCount = userViewCount;
         this.userRank = userRank;
+        this.Role = Role;
     }
     
     
@@ -173,7 +179,7 @@ public class UserDetails
     // To String
     @Override
     public String toString() {
-        return "UserDetails{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userEmail=" + userEmail + ", userProfession=" + userProfession + ", userCollege=" + userCollege + ", userLikeCount=" + userLikeCount + ", userDownloadCount=" + userDownloadCount + ", userViewCount=" + userViewCount + ", userRank=" + userRank + '}';
+        return "UserDetails{" + "userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", userEmail=" + userEmail + ", userProfession=" + userProfession + ", userCollege=" + userCollege + ", userLikeCount=" + userLikeCount + ", userDownloadCount=" + userDownloadCount + ", userViewCount=" + userViewCount + ", userRank=" + userRank + ", Role=" + Role + '}';
     }
-        
+           
 }

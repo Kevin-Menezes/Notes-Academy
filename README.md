@@ -50,6 +50,8 @@ https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=shari
 - Payment system - Razorpay API used for demo payments.
 - Admin section - Admin can control the workflow of the entire website.
 - Create PDF - Online PDF maker from images.
+- Role Based Authentication - Users cannot access Admin section.
+- Password Encryption - Users passwords are encrypted and safely stored in the DB.
 #
 
 ### Q. What features will be implemented in future?

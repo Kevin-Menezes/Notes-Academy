@@ -78,6 +78,15 @@ https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=shari
 <br/>
 <hr>
 
+# Learnings from this project :
+- Gained good experience on workflow of creating a complete fullstack website.
+- Learnt how to plan and execute this website right from it's analysis and design to it's final testing.
+- Learnt how to improvise by adding on new features at every stage.
+- Gained good experience on how to debug when faced with errors.
+
+<br/>
+<hr>
+
 # ⚖License
 Distributed under the Apache 2.0 License. See `LICENSE.md` for more information.
 

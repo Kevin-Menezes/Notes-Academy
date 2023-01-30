@@ -14,7 +14,7 @@ https://docs.google.com/document/d/1qZsYYe6iegc2V68V_-3O-IAEdrLW7DgbKgfug0lRk1g/
 
 # ▶Website video
 This video will show you the working of the website and will guide you on how to use it.
-https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=sharing
+https://drive.google.com/file/d/1RFdvnR-Kee2yaw1v-sKunKEWZ4BPiR2c/view?usp=sharing <br/>
 Further improvements and testing - https://drive.google.com/file/d/1gaiUzfEXHR3sy-X7bFxoAWRvfSIi6pSu/view
 <img alt="Index.jsp" src="https://github.com/Kevin-Menezes/Notes-Academy/blob/main/Index.png">
 
